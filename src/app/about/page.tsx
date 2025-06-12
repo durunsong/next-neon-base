@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "关于我们",
@@ -103,12 +104,12 @@ export default function AboutPage() {
               立即体验 Next Neon Base，构建你的下一个项目
             </p>
             <div className="space-x-4">
-              <a 
+              <Link 
                 href="/users" 
                 className="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 查看用户管理
-              </a>
+              </Link>
               <a 
                 href="https://github.com/your-username/next-neon-base" 
                 target="_blank"

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 // 模拟的用户数据类型
 interface User {
@@ -59,12 +60,12 @@ export default async function UserDetailPage({ params }: Props) {
             <div className="text-6xl mb-4">❌</div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">用户未找到</h1>
             <p className="text-gray-600 mb-4">ID为 {id} 的用户不存在</p>
-            <a 
+            <Link 
               href="/users" 
               className="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
             >
               返回用户列表
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -123,12 +124,12 @@ export default async function UserDetailPage({ params }: Props) {
               
               <div className="pt-4 border-t">
                 <div className="flex space-x-3">
-                  <a 
+                  <Link 
                     href="/users" 
                     className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors"
                   >
                     返回列表
-                  </a>
+                  </Link>
                   <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
                     编辑用户
                   </button>
