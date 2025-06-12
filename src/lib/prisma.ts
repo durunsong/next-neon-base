@@ -3,7 +3,7 @@
  * 全局单例模式，避免重复创建连接
  */
 
-import { PrismaClient } from '../generated/prisma'
+import { PrismaClient } from '@prisma/client'
 
 // 全局变量类型声明
 declare global {
