@@ -1,36 +1,283 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js + Prisma + Neon 用户管理系统
 
-## Getting Started
+**中文文档** | [English Documentation](./README.en.md)
 
-First, run the development server:
+这是一个基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化用户管理系统。项目提供了完整的用户 CRUD 操作 API 接口，支持用户注册、登录、信息管理等功能。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 技术栈
+
+- **前端框架**: Next.js 15.3.3 (App Router)
+- **开发语言**: TypeScript
+- **数据库 ORM**: Prisma 6.9.0
+- **云数据库**: Neon PostgreSQL
+- **包管理器**: pnpm
+- **样式框架**: Tailwind CSS 4.0
+- **代码规范**: ESLint + TypeScript ESLint
+- **部署平台**: Vercel
+
+## ✨ 功能特性
+
+- 🔐 完整的用户管理系统
+- 🏗️ RESTful API 接口设计
+- 🎯 类型安全的 TypeScript 支持
+- 🗄️ Prisma ORM 数据库操作
+- ☁️ Neon 云数据库集成
+- 📝 详细的错误处理和验证
+- 🚀 支持 Vercel 一键部署
+- 📊 支持分页查询
+- 🔒 软删除和状态管理
+
+## 📁 项目结构
+
+```
+next-neon-base/
+├── prisma/
+│   └── schema.prisma          # Prisma 数据库模型定义
+├── src/
+│   ├── lib/
+│   │   └── prisma.ts          # Prisma 客户端连接实例
+│   ├── services/
+│   │   └── userService.ts     # 用户数据操作服务类
+│   ├── app/
+│   │   └── api/
+│   │       └── users/         # 用户相关 API 路由
+│   └── examples/
+│       └── userExample.ts     # API 使用示例
+├── .env                       # 环境变量配置
+└── package.json              # 项目依赖和脚本
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ 环境配置
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. 环境变量设置
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+在项目根目录创建 `.env` 文件：
 
-## Learn More
+```env
+# Neon 数据库连接字符串
+DATABASE_URL="postgresql://用户名:密码@端点/数据库名?sslmode=require"
 
-To learn more about Next.js, take a look at the following resources:
+# Next.js 配置（可选）
+NEXTAUTH_SECRET="your-nextauth-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. 数据库表结构
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+项目使用的主要数据表：
 
-## Deploy on Vercel
+```sql
+CREATE TABLE next_base_user (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  username VARCHAR(50) UNIQUE NOT NULL,
+  email VARCHAR(100) UNIQUE,
+  phone VARCHAR(20) UNIQUE,
+  password_hash TEXT NOT NULL,
+  avatar_url TEXT,
+  role VARCHAR(20) DEFAULT 'user',
+  provider VARCHAR(20),
+  provider_id VARCHAR(100),
+  is_verified BOOLEAN DEFAULT FALSE,
+  is_active BOOLEAN DEFAULT TRUE,
+  is_deleted BOOLEAN DEFAULT FALSE,
+  login_count INTEGER DEFAULT 0,
+  last_login_at TIMESTAMP,
+  last_login_ip VARCHAR(45),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 快速开始
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 1. 克隆项目
+
+```bash
+git clone <your-repository-url>
+cd next-neon-base
+```
+
+### 2. 安装依赖
+
+```bash
+pnpm install
+```
+
+### 3. 配置数据库
+
+```bash
+# 从数据库拉取现有表结构
+pnpm db:pull
+
+# 生成 Prisma 客户端
+pnpm db:generate
+```
+
+### 4. 启动开发服务器
+
+```bash
+pnpm dev
+```
+
+打开 [http://localhost:3000](http://localhost:3000) 查看项目。
+
+## 📡 API 接口
+
+### 用户管理接口
+
+| 方法 | 路径 | 描述 | 参数 |
+|------|------|------|------|
+| `GET` | `/api/users` | 获取用户列表 | `page`, `pageSize` |
+| `POST` | `/api/users` | 创建新用户 | 用户信息 JSON |
+| `GET` | `/api/users/[id]` | 获取单个用户 | 用户 ID |
+| `PUT` | `/api/users/[id]` | 更新用户信息 | 用户 ID + 更新数据 |
+| `DELETE` | `/api/users/[id]` | 删除用户(软删除) | 用户 ID |
+
+### 请求示例
+
+#### 创建用户
+
+```bash
+curl -X POST http://localhost:3000/api/users \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "testuser",
+    "email": "test@example.com",
+    "password_hash": "hashed_password"
+  }'
+```
+
+#### 获取用户列表
+
+```bash
+curl "http://localhost:3000/api/users?page=1&pageSize=10"
+```
+
+### 响应格式
+
+```json
+{
+  "success": true,
+  "message": "操作成功",
+  "data": {
+    // 返回的数据
+  }
+}
+```
+
+## 🛠️ 开发脚本
+
+```bash
+# 开发相关
+pnpm dev          # 启动开发服务器
+pnpm build        # 构建生产版本
+pnpm start        # 启动生产服务器
+pnpm lint         # 代码检查
+
+# 数据库相关
+pnpm db:generate  # 生成 Prisma 客户端
+pnpm db:push      # 推送 schema 到数据库
+pnpm db:pull      # 从数据库拉取 schema
+pnpm db:migrate   # 运行数据库迁移
+pnpm db:studio    # 打开 Prisma Studio
+```
+
+## 🔧 数据库管理
+
+### Prisma Studio
+
+```bash
+pnpm db:studio
+```
+
+在浏览器中打开可视化数据库管理界面。
+
+### 数据库迁移
+
+```bash
+# 创建新的迁移
+pnpm db:migrate
+
+# 重置数据库
+npx prisma migrate reset
+```
+
+## 🌐 部署指南
+
+### Vercel 部署
+
+1. 将代码推送到 GitHub
+2. 在 Vercel 中导入项目
+3. 在 Vercel 项目设置中添加环境变量：
+   - `DATABASE_URL`: Neon 数据库连接字符串
+4. 部署会自动完成
+
+### 环境变量配置
+
+在 Vercel 项目设置的 Environment Variables 中添加：
+
+```
+DATABASE_URL=postgresql://your-neon-connection-string
+```
+
+## 📚 使用示例
+
+查看 `src/examples/userExample.ts` 了解如何在前端调用 API 接口：
+
+```typescript
+import { UserApiClient } from '../examples/userExample'
+
+// 获取用户列表
+const users = await UserApiClient.getUsers(1, 10)
+
+// 创建新用户
+const newUser = await UserApiClient.createUser({
+  username: 'testuser',
+  email: 'test@example.com',
+  password_hash: 'hashed_password'
+})
+```
+
+## 🐛 故障排除
+
+### 常见问题
+
+1. **Prisma 客户端未生成**
+   ```bash
+   pnpm db:generate
+   ```
+
+2. **数据库连接失败**
+   - 检查 `.env` 文件中的 `DATABASE_URL`
+   - 确保 Neon 数据库正常运行
+
+3. **ESLint 错误**
+   - 运行 `pnpm lint` 检查代码规范
+   - 查看 `eslint.config.mjs` 配置
+
+## 🤝 贡献指南
+
+1. Fork 项目
+2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
+
+## 📄 许可证
+
+该项目基于 MIT 许可证开源。查看 `LICENSE` 文件了解更多信息。
+
+## 🔗 相关链接
+
+- [Next.js 文档](https://nextjs.org/docs)
+- [Prisma 文档](https://www.prisma.io/docs)
+- [Neon 数据库](https://neon.tech/)
+- [Vercel 部署](https://vercel.com/)
+
+---
+
+**注意**: 这是一个用于学习和开发的示例项目。在生产环境中使用时，请确保：
+- 使用适当的密码加密算法
+- 实现适当的身份验证和授权机制
+- 添加 API 限速和安全措施
+- 进行充分的测试和错误处理
