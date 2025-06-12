@@ -27,7 +27,6 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
     apple: '/favicon.ico',
   },
-  manifest: '/manifest.json',
 };
 ```
 
@@ -135,7 +134,6 @@ export const metadata: Metadata = {
   creator: "创建者",
   publisher: "发布者",
   robots: "index, follow",
-  manifest: "/manifest.json",
 };
 ```
 
@@ -149,8 +147,7 @@ export const metadata: Metadata = {
 public/
 ├── favicon.ico          # 标准 favicon
 ├── apple-icon.png       # Apple 设备图标
-├── icon-192x192.png     # PWA 图标
-└── manifest.json        # PWA 配置
+└── icon-192x192.png     # PWA 图标
 ```
 
 ### 2. 在 Metadata 中引用
