@@ -1,12 +1,6 @@
 'use client';
 
 import React from 'react';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Zustand 演示',
-  description: 'Zustand 状态管理库的使用演示，包括认证状态、应用状态和通知系统',
-};
 import { 
   Card, 
   Button, 
