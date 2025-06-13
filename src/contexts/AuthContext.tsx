@@ -70,7 +70,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setUser(userData);
       setToken(userToken);
       // 设置cookies，有效期7天，httpOnly: false以便JS能读取
-      Cookies.set('user', JSON.stringify(userData), { expires: 7, secure: false, sameSite: 'lax' });
+      // Cookies.set('user', JSON.stringify(userData), { expires: 7, secure: false, sameSite: 'lax' });
       Cookies.set('token', userToken, { expires: 7, secure: false, sameSite: 'lax' });
       message.success(`欢迎回来，${userData.username}！`);
     } catch (error) {

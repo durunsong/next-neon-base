@@ -3,7 +3,6 @@
 import React from 'react';
 import { Button, Row, Col, Card, Typography, Space } from 'antd';
 import { 
-  CarOutlined, 
   ThunderboltOutlined, 
   SafetyOutlined, 
   GlobalOutlined,
@@ -12,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import CarImageViewer from '@/components/CarImageViewer';
+import CarCarousel from '@/components/CarCarousel';
 import CarCharts from '@/components/CarCharts';
 
 const { Title, Paragraph } = Typography;
@@ -68,67 +67,9 @@ export default function HomePage() {
 
   return (
     <div className="relative">
-      {/* Hero Section with Car Image Viewer */}
+      {/* Hero Section with Car Carousel */}
       <section className="hero-section">
-        <CarImageViewer className="car-image-viewer" />
-        <div className="hero-content">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="max-w-4xl mx-auto px-4"
-          >
-            <Title 
-              level={1} 
-              className="text-white text-center mb-6"
-              style={{ 
-                fontSize: 'clamp(2.5rem, 8vw, 6rem)',
-                lineHeight: '1.1',
-                textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-              }}
-            >
-              <span className="gradient-text">极速汽车</span>
-            </Title>
-            <Paragraph 
-              className="text-white text-center text-lg md:text-xl mb-8 opacity-90"
-              style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
-            >
-              驾驭未来，超越极限。全球领先的豪华汽车销售平台，为您提供最顶级的驾驶体验。
-            </Paragraph>
-            <div className="text-center space-x-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                style={{ display: 'inline-block' }}
-              >
-                <Button 
-                  type="primary" 
-                  size="large" 
-                  className="mr-4 px-8 py-6 text-lg font-semibold"
-                  style={{ height: 'auto' }}
-                >
-                  <Link href="/cars">
-                    <CarOutlined className="mr-2" />
-                    探索车型
-                  </Link>
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                style={{ display: 'inline-block' }}
-              >
-                <Button 
-                  size="large" 
-                  className="glass-effect text-white border-white hover:bg-white hover:text-black px-8 py-6 text-lg"
-                  style={{ height: 'auto' }}
-                >
-                  <Link href="/about">了解更多</Link>
-                </Button>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
+        <CarCarousel className="car-carousel" />
       </section>
 
       {/* Features Section */}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ConfigProvider } from 'antd';
+import AntdProvider from "@/components/AntdProvider";
 import Header from "@/components/Header";
 import { AuthProvider } from "@/contexts/AuthContext";
 
@@ -46,32 +46,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Ant Design 主题配置
-const antdTheme = {
-  token: {
-    colorPrimary: '#FF6B6B',
-    colorSuccess: '#4ECDC4',
-    colorWarning: '#FFD93D',
-    colorError: '#FF6B6B',
-    colorInfo: '#45B7D1',
-    fontFamily: 'var(--font-geist-sans)',
-    borderRadius: 8,
-    wireframe: false,
-  },
-  components: {
-    Button: {
-      borderRadius: 8,
-      controlHeight: 40,
-    },
-    Card: {
-      borderRadius: 12,
-    },
-    Menu: {
-      itemHeight: 48,
-      borderRadius: 8,
-    },
-  },
-};
+// Ant Design 主题配置已移至 AntdProvider 组件
 
 export default function RootLayout({
   children,
@@ -83,14 +58,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ConfigProvider theme={antdTheme}>
+        <AntdProvider>
           <AuthProvider>
             <Header />
             <main className="min-h-screen">
               {children}
             </main>
           </AuthProvider>
-        </ConfigProvider>
+        </AntdProvider>
       </body>
     </html>
   );

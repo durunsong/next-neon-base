@@ -46,7 +46,8 @@ body {
   overflow: hidden;
 }
 
-.car-image-viewer {
+/* 汽车轮播图样式 */
+.car-carousel {
   position: absolute;
   top: 0;
   left: 0;
@@ -55,6 +56,134 @@ body {
   z-index: 1;
 }
 
+/* 自定义轮播图指示器样式 */
+.custom-dots {
+  bottom: 30px !important;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.custom-dots li {
+  width: 12px !important;
+  height: 12px !important;
+  margin: 0 8px !important;
+}
+
+.custom-dots li button {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  transition: all 0.3s ease !important;
+}
+
+.custom-dots li.slick-active button {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(255, 255, 255, 1) !important;
+  transform: scale(1.2) !important;
+}
+
+.custom-dots li:hover button {
+  background: rgba(255, 255, 255, 0.6) !important;
+  transform: scale(1.1) !important;
+}
+
+/* 轮播图过渡动画增强 */
+.ant-carousel .slick-slide {
+  transition: all 0.8s ease-in-out !important;
+}
+
+.ant-carousel .slick-track {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 轮播图渐变遮罩效果 */
+.car-carousel .ant-carousel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .custom-dots {
+    bottom: 15px !important;
+  }
+  
+  .custom-dots li {
+    width: 8px !important;
+    height: 8px !important;
+    margin: 0 4px !important;
+  }
+  
+  .custom-dots li button {
+    width: 8px !important;
+    height: 8px !important;
+  }
+}
+
+/* 新轮播图样式增强 */
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 15s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* 确保轮播图按钮样式正确 */
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next {
+  display: none !important;
+}
+
+/* 确保轮播图内容正确显示 */
+.ant-carousel .slick-slide {
+  height: 100vh !important;
+}
+
+.ant-carousel .slick-slide > div {
+  height: 100vh !important;
+}
+
+.ant-carousel .slick-list,
+.ant-carousel .slick-track {
+  height: 100vh !important;
+}
+
+/* 注释掉不再使用的hero-content样式 
 .hero-content {
   position: relative;
   z-index: 2;
@@ -66,6 +195,7 @@ body {
   color: white;
   background: rgba(0, 0, 0, 0.3);
 }
+*/
 
 .glass-effect {
   backdrop-filter: blur(10px);
