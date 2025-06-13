@@ -26,7 +26,7 @@ import {
   WechatOutlined
 } from '@ant-design/icons';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuthStore } from '@/stores/authStore';
 
 const { Title, Paragraph } = Typography;
 
@@ -58,7 +58,7 @@ export default function AuthModal({ visible, onClose, initialMode = 'login' }: A
   const [loginLoading, setLoginLoading] = useState(false);
   const [registerLoading, setRegisterLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const { login } = useAuth();
+  const { login } = useAuthStore();
 
   // 计算密码强度
   const calculatePasswordStrength = (password: string): number => {

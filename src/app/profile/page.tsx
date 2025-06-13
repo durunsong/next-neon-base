@@ -33,13 +33,14 @@ import {
   ClockCircleOutlined
 } from '@ant-design/icons';
 import { motion } from 'framer-motion';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuthStore, useIsAuthenticated } from '@/stores/authStore';
 import Link from 'next/link';
 
 const { Title, Paragraph, Text } = Typography;
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, updateUser } = useAuth();
+  const { user, updateUser } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
   const [editing, setEditing] = useState(false);
   const [form] = Form.useForm();
   const [uploading, setUploading] = useState(false);
@@ -358,29 +359,39 @@ export default function ProfilePage() {
 
             <Col xs={24} lg={12}>
               <Card title="最近活动" className="shadow-md" extra={<StarOutlined />}>
-                <Timeline>
-                  <Timeline.Item color="green">
-                    <div>
-                      <Text strong>账户登录</Text>
-                      <br />
-                      <Text type="secondary">{formatDate(user.last_login_at)}</Text>
-                    </div>
-                  </Timeline.Item>
-                  <Timeline.Item color="blue">
-                    <div>
-                      <Text strong>信息更新</Text>
-                      <br />
-                      <Text type="secondary">{formatDate(user.last_login_at)}</Text>
-                    </div>
-                  </Timeline.Item>
-                  <Timeline.Item>
-                    <div>
-                      <Text strong>账户创建</Text>
-                      <br />
-                      <Text type="secondary">{formatDate(user.created_at)}</Text>
-                    </div>
-                  </Timeline.Item>
-                </Timeline>
+                <Timeline
+                  items={[
+                    {
+                      color: 'green',
+                      children: (
+                        <div>
+                          <Text strong>账户登录</Text>
+                          <br />
+                          <Text type="secondary">{formatDate(user.last_login_at)}</Text>
+                        </div>
+                      )
+                    },
+                    {
+                      color: 'blue',
+                      children: (
+                        <div>
+                          <Text strong>信息更新</Text>
+                          <br />
+                          <Text type="secondary">{formatDate(user.last_login_at)}</Text>
+                        </div>
+                      )
+                    },
+                    {
+                      children: (
+                        <div>
+                          <Text strong>账户创建</Text>
+                          <br />
+                          <Text type="secondary">{formatDate(user.created_at)}</Text>
+                        </div>
+                      )
+                    }
+                  ]}
+                />
               </Card>
             </Col>
           </Row>

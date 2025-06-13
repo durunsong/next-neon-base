@@ -16,7 +16,7 @@ import {
 } from '@ant-design/icons';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuthStore, useIsAuthenticated } from '@/stores/authStore';
 import AuthModal from './AuthModal';
 
 const { Header: AntHeader } = Layout;
@@ -26,7 +26,8 @@ const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [authModalVisible, setAuthModalVisible] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, logout } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
 
   // 监听滚动事件，为头部添加背景
   useEffect(() => {
