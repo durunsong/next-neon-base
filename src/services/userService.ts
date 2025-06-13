@@ -62,6 +62,15 @@ export class UserService {
   }
 
   /**
+   * 根据手机号获取用户
+   */
+  static async getUserByPhone(phone: string): Promise<next_base_user | null> {
+    return await prisma.next_base_user.findUnique({
+      where: { phone }
+    })
+  }
+
+  /**
    * 获取所有用户（支持分页）
    */
   static async getUsers(page: number = 1, pageSize: number = 10): Promise<{
@@ -172,6 +181,17 @@ export class UserService {
   static async isEmailExists(email: string): Promise<boolean> {
     const user = await prisma.next_base_user.findUnique({
       where: { email },
+      select: { id: true }
+    })
+    return !!user
+  }
+
+  /**
+   * 检查手机号是否已存在
+   */
+  static async isPhoneExists(phone: string): Promise<boolean> {
+    const user = await prisma.next_base_user.findUnique({
+      where: { phone },
       select: { id: true }
     })
     return !!user

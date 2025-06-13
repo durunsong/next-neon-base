@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
+import { ConfigProvider } from 'antd';
+import Header from "@/components/Header";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,19 +17,59 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Next Neon Base',
-    default: 'Next Neon Base - 用户管理系统',
+    template: '%s | 极速汽车',
+    default: '极速汽车 - 领先的汽车销售平台',
   },
-  description: "基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化用户管理系统",
-  keywords: ["Next.js", "Prisma", "Neon", "用户管理", "TypeScript"],
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
-  publisher: "Your Name",
-  metadataBase: new URL('https://your-domain.vercel.app'),
+  description: "极速汽车，全球领先的豪华汽车销售平台。提供奔驰、宝马、奥迪、特斯拉等顶级品牌的销售服务。",
+  keywords: ["汽车销售", "豪华汽车", "奔驰", "宝马", "奥迪", "特斯拉", "汽车购买"],
+  authors: [{ name: "极速汽车团队" }],
+  creator: "极速汽车",
+  publisher: "极速汽车",
+  metadataBase: new URL('https://car-website.vercel.app'),
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
     apple: '/favicon.ico',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'zh_CN',
+    url: 'https://car-website.vercel.app',
+    title: '极速汽车 - 领先的汽车销售平台',
+    description: '极速汽车，全球领先的豪华汽车销售平台',
+    siteName: '极速汽车',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '极速汽车',
+    description: '极速汽车，全球领先的豪华汽车销售平台',
+  },
+};
+
+// Ant Design 主题配置
+const antdTheme = {
+  token: {
+    colorPrimary: '#FF6B6B',
+    colorSuccess: '#4ECDC4',
+    colorWarning: '#FFD93D',
+    colorError: '#FF6B6B',
+    colorInfo: '#45B7D1',
+    fontFamily: 'var(--font-geist-sans)',
+    borderRadius: 8,
+    wireframe: false,
+  },
+  components: {
+    Button: {
+      borderRadius: 8,
+      controlHeight: 40,
+    },
+    Card: {
+      borderRadius: 12,
+    },
+    Menu: {
+      itemHeight: 48,
+      borderRadius: 8,
+    },
   },
 };
 
@@ -41,10 +83,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navigation />
-        <main>
-          {children}
-        </main>
+        <ConfigProvider theme={antdTheme}>
+          <AuthProvider>
+            <Header />
+            <main className="min-h-screen">
+              {children}
+            </main>
+          </AuthProvider>
+        </ConfigProvider>
       </body>
     </html>
   );
