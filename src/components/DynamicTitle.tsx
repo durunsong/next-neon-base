@@ -8,6 +8,12 @@ export default function DynamicTitle() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // 如果pathname为null，使用默认标题
+    if (!pathname) {
+      document.title = 'Next Neon Base';
+      return;
+    }
+
     // 动态设置页面标题的映射
     const titleMap: Record<string, string> = {
       '/': '首页 | Next Neon Base',

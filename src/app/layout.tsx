@@ -45,7 +45,7 @@ export default function RootLayout({
       >
         {/* 固定在顶部的导航栏 */}
         <div className="fixed top-0 left-0 right-0 z-50">
-          <Navigation />
+        <Navigation />
         </div>
         {/* 主内容区域，添加上边距避免被导航栏遮挡 */}
         <main className="mt-16">

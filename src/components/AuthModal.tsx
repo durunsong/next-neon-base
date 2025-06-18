@@ -33,7 +33,7 @@ export default function AuthModal({ open, onCancel }: AuthModalProps) {
   const [registerForm] = Form.useForm<RegisterForm>();
 
   // 自定义密码强度验证器
-  const passwordValidator = (_: any, value: string) => {
+  const passwordValidator = (_: unknown, value: string) => {
     if (!value) {
       return Promise.reject(new Error('请输入密码！'));
     }

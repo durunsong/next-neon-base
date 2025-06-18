@@ -15,7 +15,7 @@ interface User {
   provider?: string | null;
   created_at: string;
   updated_at: string;
-  login_count: number;
+  login_count: number | null; // 修复：允许为null
 }
 
 // 获取用户数据的函数 - 直接调用服务层

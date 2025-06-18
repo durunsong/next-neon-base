@@ -30,7 +30,7 @@ interface AuthActions {
 // 创建认证store
 export const useAuthStore = create<AuthState & AuthActions>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       // 初始状态
       user: null,
       token: null,
