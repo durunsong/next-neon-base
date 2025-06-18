@@ -1,25 +1,43 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { UserService } from "../../../services/userService";
 
-// 模拟的用户数据类型
+// 用户数据类型 - 与数据库结构匹配
 interface User {
   id: string;
   username: string;
-  email?: string;
-  role?: string;
+  email?: string | null;
+  phone?: string | null;
+  role?: string | null;
+  avatar_url?: string | null;
+  is_active: boolean | null;
+  is_verified: boolean | null;
+  provider?: string | null;
+  created_at: string;
+  updated_at: string;
+  login_count: number;
 }
 
-// 模拟获取用户数据的函数
+// 获取用户数据的函数 - 直接调用服务层
 async function getUser(id: string): Promise<User | null> {
-  // 在实际项目中，这里会调用API或数据库
-  // 这里只是模拟数据
-  const users = [
-    { id: '1', username: 'admin', email: 'admin@example.com', role: 'admin' },
-    { id: '2', username: 'user1', email: 'user1@example.com', role: 'user' },
-    { id: '3', username: 'user2', email: 'user2@example.com', role: 'user' },
-  ];
-  
-  return users.find(user => user.id === id) || null;
+  try {
+    // 直接调用 UserService，不需要 HTTP 请求
+    const user = await UserService.getUserById(id);
+    
+    if (!user) {
+      return null;
+    }
+
+    // 转换日期格式为字符串以符合接口定义，处理null值
+    return {
+      ...user,
+      created_at: user.created_at?.toISOString() || new Date().toISOString(),
+      updated_at: user.updated_at?.toISOString() || new Date().toISOString()
+    };
+  } catch (error) {
+    console.error('获取用户数据失败:', error);
+    return null;
+  }
 }
 
 // 动态生成metadata
@@ -118,6 +136,23 @@ export default async function UserDetailPage({ params }: Props) {
                   </label>
                   <p className="text-gray-900 bg-gray-50 px-3 py-2 rounded border">
                     {user.email || '未设置'}
+                  </p>
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    登录次数
+                  </label>
+                  <p className="text-gray-900 bg-gray-50 px-3 py-2 rounded border">
+                    {user.login_count || '未设置'}
+                  </p>
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    创建时间
+                  </label>
+                  <p className="text-gray-900 bg-gray-50 px-3 py-2 rounded border">
+                    {/* 格式化时间 */}
+                    {user.created_at ? new Date(user.created_at).toLocaleString() : '未设置'}
                   </p>
                 </div>
               </div>

@@ -62,6 +62,34 @@ export class UserService {
   }
 
   /**
+   * 根据手机号获取用户
+   */
+  static async getUserByPhone(phone: string): Promise<next_base_user | null> {
+    return await prisma.next_base_user.findUnique({
+      where: { phone }
+    })
+  }
+
+  /**
+   * 根据账号获取用户（支持邮箱、手机号、用户名）
+   */
+  static async getUserByAccount(account: string): Promise<next_base_user | null> {
+    // 尝试按邮箱查找
+    if (account.includes('@')) {
+      return await this.getUserByEmail(account);
+    }
+    
+    // 尝试按手机号查找（假设手机号是纯数字或包含+/-符号）
+    if (/^[\d+\-\s()]+$/.test(account)) {
+      const user = await this.getUserByPhone(account);
+      if (user) return user;
+    }
+    
+    // 最后按用户名查找
+    return await this.getUserByUsername(account);
+  }
+
+  /**
    * 获取所有用户（支持分页）
    */
   static async getUsers(page: number = 1, pageSize: number = 10): Promise<{
@@ -172,6 +200,17 @@ export class UserService {
   static async isEmailExists(email: string): Promise<boolean> {
     const user = await prisma.next_base_user.findUnique({
       where: { email },
+      select: { id: true }
+    })
+    return !!user
+  }
+
+  /**
+   * 检查手机号是否已存在
+   */
+  static async isPhoneExists(phone: string): Promise<boolean> {
+    const user = await prisma.next_base_user.findUnique({
+      where: { phone },
       select: { id: true }
     })
     return !!user

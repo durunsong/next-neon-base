@@ -1,3 +1,5 @@
+import '@ant-design/v5-patch-for-react-19';
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -41,8 +43,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navigation />
-        <main>
+        {/* 固定在顶部的导航栏 */}
+        <div className="fixed top-0 left-0 right-0 z-50">
+          <Navigation />
+        </div>
+        {/* 主内容区域，添加上边距避免被导航栏遮挡 */}
+        <main className="mt-16">
           {children}
         </main>
       </body>

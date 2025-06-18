@@ -24,3 +24,73 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 认证弹窗样式 */
+.auth-modal .ant-modal-content {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.auth-modal .ant-modal-header {
+  padding: 0;
+  border-bottom: none;
+  margin: 0;
+}
+
+.auth-modal .ant-modal-body {
+  padding: 0;
+}
+
+.auth-tabs .ant-tabs-nav {
+  margin: 0;
+  padding: 0 24px;
+  background: #f8f9fa;
+}
+
+.auth-tabs .ant-tabs-tab {
+  padding: 16px 24px;
+  font-weight: 500;
+}
+
+.auth-tabs .ant-tabs-tab-active {
+  background: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.auth-tabs .ant-tabs-content-holder {
+  background: white;
+}
+
+/* 表单输入框样式 */
+.auth-modal .ant-input,
+.auth-modal .ant-input-password {
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s;
+}
+
+.auth-modal .ant-input:focus,
+.auth-modal .ant-input-password:focus,
+.auth-modal .ant-input-focused,
+.auth-modal .ant-input-password-focused {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.auth-modal .ant-input:hover,
+.auth-modal .ant-input-password:hover {
+  border-color: #3b82f6;
+}
+
+/* 按钮样式 */
+.auth-modal .ant-btn-primary {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.auth-modal .ant-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
