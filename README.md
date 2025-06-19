@@ -125,13 +125,13 @@ pnpm dev
 
 ### 用户管理接口
 
-| 方法 | 路径 | 描述 | 参数 |
-|------|------|------|------|
-| `GET` | `/api/users` | 获取用户列表 | `page`, `pageSize` |
-| `POST` | `/api/users` | 创建新用户 | 用户信息 JSON |
-| `GET` | `/api/users/[id]` | 获取单个用户 | 用户 ID |
-| `PUT` | `/api/users/[id]` | 更新用户信息 | 用户 ID + 更新数据 |
-| `DELETE` | `/api/users/[id]` | 删除用户(软删除) | 用户 ID |
+| 方法     | 路径              | 描述             | 参数               |
+| -------- | ----------------- | ---------------- | ------------------ |
+| `GET`    | `/api/users`      | 获取用户列表     | `page`, `pageSize` |
+| `POST`   | `/api/users`      | 创建新用户       | 用户信息 JSON      |
+| `GET`    | `/api/users/[id]` | 获取单个用户     | 用户 ID            |
+| `PUT`    | `/api/users/[id]` | 更新用户信息     | 用户 ID + 更新数据 |
+| `DELETE` | `/api/users/[id]` | 删除用户(软删除) | 用户 ID            |
 
 ### 请求示例
 
@@ -178,10 +178,10 @@ pnpm lint         # 代码检查
 pnpm db:generate  # 生成 Prisma 客户端
 pnpm db:push      # 推送 schema 到数据库
 pnpm db:pull      # 从数据库拉取 schema
-pnpm db:migrate   # 运行数据库迁移
+pnpm db:migrate   # 运行数据库迁移 (迁移会创建版本历史，可以回滚)
 pnpm db:studio    # 打开 Prisma Studio
 pnpm db:seed      # 运行数据库种子数据
-pnpm db:sync      # 同步数据库结构并生成客户端 --从数据库同步到代码
+pnpm db:sync      # 同步数据库结构并生成客户端 --从数据库同步到代码 (NPM Scripts 串联命令)
 pnpm db:dev-push  # 快速推送+生成 -- 开发环境快速原型
 ```
 
@@ -228,17 +228,17 @@ DATABASE_URL=postgresql://your-neon-connection-string
 查看 `src/examples/userExample.ts` 了解如何在前端调用 API 接口：
 
 ```typescript
-import { UserApiClient } from '../examples/userExample'
+import { UserApiClient } from '../examples/userExample';
 
 // 获取用户列表
-const users = await UserApiClient.getUsers(1, 10)
+const users = await UserApiClient.getUsers(1, 10);
 
 // 创建新用户
 const newUser = await UserApiClient.createUser({
   username: 'testuser',
   email: 'test@example.com',
-  password_hash: 'hashed_password'
-})
+  password_hash: 'hashed_password',
+});
 ```
 
 ## 🐛 故障排除
@@ -246,11 +246,13 @@ const newUser = await UserApiClient.createUser({
 ### 常见问题
 
 1. **Prisma 客户端未生成**
+
    ```bash
    pnpm db:generate
    ```
 
 2. **数据库连接失败**
+
    - 检查 `.env` 文件中的 `DATABASE_URL`
    - 确保 Neon 数据库正常运行
 
@@ -280,6 +282,7 @@ const newUser = await UserApiClient.createUser({
 ---
 
 **注意**: 这是一个用于学习和开发的示例项目。在生产环境中使用时，请确保：
+
 - 使用适当的密码加密算法
 - 实现适当的身份验证和授权机制
 - 添加 API 限速和安全措施

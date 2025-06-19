@@ -1,10 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Button, Dropdown, message } from 'antd';
+
+import { useEffect, useState } from 'react';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button, Dropdown, Avatar, message } from 'antd';
-import { UserOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons';
+
 import { useAuthStore } from '../store/authStore';
 import AuthModal from './AuthModal';
 
@@ -12,7 +15,7 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const pathname = usePathname();
-  
+
   const { user, isAuthenticated, logout, initAuth } = useAuthStore();
 
   // 初始化认证状态
@@ -28,7 +31,7 @@ export default function Navigation() {
 
   const isActive = (href: string) => {
     if (!pathname) return false;
-    
+
     if (href === '/') {
       return pathname === '/';
     }
@@ -41,7 +44,7 @@ export default function Navigation() {
       const response = await fetch('/api/auth/logout', {
         method: 'POST',
       });
-      
+
       if (response.ok) {
         logout();
         message.success('登出成功！');
@@ -63,7 +66,7 @@ export default function Navigation() {
       onClick: () => {
         // 这里可以跳转到个人资料页面
         message.info('个人资料功能即将推出');
-      }
+      },
     },
     {
       key: 'settings',
@@ -72,7 +75,7 @@ export default function Navigation() {
       onClick: () => {
         // 这里可以跳转到设置页面
         message.info('设置功能即将推出');
-      }
+      },
     },
     {
       type: 'divider' as const,
@@ -81,8 +84,8 @@ export default function Navigation() {
       key: 'logout',
       icon: <LogoutOutlined />,
       label: '登出',
-      onClick: handleLogout
-    }
+      onClick: handleLogout,
+    },
   ];
 
   return (
@@ -102,7 +105,7 @@ export default function Navigation() {
             <div className="hidden md:flex items-center space-x-8">
               {/* 导航链接 */}
               <div className="flex space-x-8">
-                {navItems.map((item) => (
+                {navItems.map(item => (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -122,12 +125,12 @@ export default function Navigation() {
               {isAuthenticated && user ? (
                 <div className="flex items-center space-x-4">
                   <span className="text-sm text-gray-600">欢迎，{user.username}!</span>
-                  <Dropdown 
-                    menu={{ items: userMenuItems }} 
+                  <Dropdown
+                    menu={{ items: userMenuItems }}
                     placement="bottomRight"
                     trigger={['click']}
                   >
-                    <Avatar 
+                    <Avatar
                       className="cursor-pointer hover:opacity-80 transition-opacity"
                       src={user.avatar_url}
                       icon={<UserOutlined />}
@@ -136,8 +139,8 @@ export default function Navigation() {
                   </Dropdown>
                 </div>
               ) : (
-                <Button 
-                  type="primary" 
+                <Button
+                  type="primary"
                   onClick={() => setAuthModalOpen(true)}
                   className="bg-blue-500 hover:bg-blue-600 border-blue-500 hover:border-blue-600"
                 >
@@ -152,12 +155,7 @@ export default function Navigation() {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2"
               >
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   {isMenuOpen ? (
                     <path
                       strokeLinecap="round"
@@ -182,7 +180,7 @@ export default function Navigation() {
           {isMenuOpen && (
             <div className="md:hidden pb-4">
               <div className="space-y-2">
-                {navItems.map((item) => (
+                {navItems.map(item => (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -197,25 +195,20 @@ export default function Navigation() {
                     {item.label}
                   </Link>
                 ))}
-                
+
                 {/* 移动端用户状态 */}
                 <div className="pt-2 border-t">
                   {isAuthenticated && user ? (
                     <div className="px-3 py-2 space-y-2">
                       <p className="text-sm text-gray-600">欢迎，{user.username}!</p>
-                      <Button 
-                        type="default" 
-                        size="small" 
-                        onClick={handleLogout}
-                        className="w-full"
-                      >
+                      <Button type="default" size="small" onClick={handleLogout} className="w-full">
                         登出
                       </Button>
                     </div>
                   ) : (
                     <div className="px-3 py-2">
-                      <Button 
-                        type="primary" 
+                      <Button
+                        type="primary"
                         onClick={() => {
                           setAuthModalOpen(true);
                           setIsMenuOpen(false);
@@ -234,10 +227,7 @@ export default function Navigation() {
       </nav>
 
       {/* 认证弹窗 */}
-      <AuthModal 
-        open={authModalOpen} 
-        onCancel={() => setAuthModalOpen(false)} 
-      />
+      <AuthModal open={authModalOpen} onCancel={() => setAuthModalOpen(false)} />
     </>
   );
-} 
+}

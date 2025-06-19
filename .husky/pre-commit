@@ -1,0 +1,5 @@
+echo "🚀 Running pre-commit checks..."
+pnpm type-check
+pnpm lint
+pnpm pre-commit
+echo "✅ Pre-commit checks passed!"

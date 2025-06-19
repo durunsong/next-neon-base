@@ -2,24 +2,24 @@
  * 用户服务类
  * 提供用户相关的数据库操作方法
  */
+import type { next_base_user } from '@prisma/client';
 
-import prisma from '../lib/prisma'
-import type { next_base_user } from '@prisma/client'
+import prisma from '../lib/prisma';
 
 // 用户创建类型（排除自动生成的字段）
 export type CreateUserInput = {
-  username: string
-  email?: string
-  phone?: string
-  password_hash: string
-  avatar_url?: string
-  role?: string
-  provider?: string
-  provider_id?: string
-}
+  username: string;
+  email?: string;
+  phone?: string;
+  password_hash: string;
+  avatar_url?: string;
+  role?: string;
+  provider?: string;
+  provider_id?: string;
+};
 
 // 用户更新类型
-export type UpdateUserInput = Partial<Omit<CreateUserInput, 'username'>>
+export type UpdateUserInput = Partial<Omit<CreateUserInput, 'username'>>;
 
 /**
  * 用户服务类
@@ -30,8 +30,8 @@ export class UserService {
    */
   static async createUser(userData: CreateUserInput): Promise<next_base_user> {
     return await prisma.next_base_user.create({
-      data: userData
-    })
+      data: userData,
+    });
   }
 
   /**
@@ -39,8 +39,8 @@ export class UserService {
    */
   static async getUserById(id: string): Promise<next_base_user | null> {
     return await prisma.next_base_user.findUnique({
-      where: { id }
-    })
+      where: { id },
+    });
   }
 
   /**
@@ -48,8 +48,8 @@ export class UserService {
    */
   static async getUserByUsername(username: string): Promise<next_base_user | null> {
     return await prisma.next_base_user.findUnique({
-      where: { username }
-    })
+      where: { username },
+    });
   }
 
   /**
@@ -57,8 +57,8 @@ export class UserService {
    */
   static async getUserByEmail(email: string): Promise<next_base_user | null> {
     return await prisma.next_base_user.findUnique({
-      where: { email }
-    })
+      where: { email },
+    });
   }
 
   /**
@@ -66,8 +66,8 @@ export class UserService {
    */
   static async getUserByPhone(phone: string): Promise<next_base_user | null> {
     return await prisma.next_base_user.findUnique({
-      where: { phone }
-    })
+      where: { phone },
+    });
   }
 
   /**
@@ -78,13 +78,13 @@ export class UserService {
     if (account.includes('@')) {
       return await this.getUserByEmail(account);
     }
-    
+
     // 尝试按手机号查找（假设手机号是纯数字或包含+/-符号）
     if (/^[\d+\-\s()]+$/.test(account)) {
       const user = await this.getUserByPhone(account);
       if (user) return user;
     }
-    
+
     // 最后按用户名查找
     return await this.getUserByUsername(account);
   }
@@ -92,38 +92,41 @@ export class UserService {
   /**
    * 获取所有用户（支持分页）
    */
-  static async getUsers(page: number = 1, pageSize: number = 10): Promise<{
-    users: next_base_user[]
-    total: number
-    totalPages: number
+  static async getUsers(
+    page: number = 1,
+    pageSize: number = 10
+  ): Promise<{
+    users: next_base_user[];
+    total: number;
+    totalPages: number;
   }> {
-    const skip = (page - 1) * pageSize
-    
+    const skip = (page - 1) * pageSize;
+
     const [users, total] = await Promise.all([
       prisma.next_base_user.findMany({
         skip,
         take: pageSize,
         where: {
           is_deleted: false,
-          is_active: true
+          is_active: true,
         },
         orderBy: {
-          created_at: 'desc'
-        }
+          created_at: 'desc',
+        },
       }),
       prisma.next_base_user.count({
         where: {
           is_deleted: false,
-          is_active: true
-        }
-      })
-    ])
+          is_active: true,
+        },
+      }),
+    ]);
 
     return {
       users,
       total,
-      totalPages: Math.ceil(total / pageSize)
-    }
+      totalPages: Math.ceil(total / pageSize),
+    };
   }
 
   /**
@@ -134,9 +137,9 @@ export class UserService {
       where: { id },
       data: {
         ...userData,
-        updated_at: new Date()
-      }
-    })
+        updated_at: new Date(),
+      },
+    });
   }
 
   /**
@@ -148,9 +151,9 @@ export class UserService {
       data: {
         is_deleted: true,
         is_active: false,
-        updated_at: new Date()
-      }
-    })
+        updated_at: new Date(),
+      },
+    });
   }
 
   /**
@@ -161,13 +164,13 @@ export class UserService {
       where: { id },
       data: {
         login_count: {
-          increment: 1
+          increment: 1,
         },
         last_login_at: new Date(),
         last_login_ip: loginIp,
-        updated_at: new Date()
-      }
-    })
+        updated_at: new Date(),
+      },
+    });
   }
 
   /**
@@ -178,9 +181,9 @@ export class UserService {
       where: { id },
       data: {
         is_verified: true,
-        updated_at: new Date()
-      }
-    })
+        updated_at: new Date(),
+      },
+    });
   }
 
   /**
@@ -189,9 +192,9 @@ export class UserService {
   static async isUsernameExists(username: string): Promise<boolean> {
     const user = await prisma.next_base_user.findUnique({
       where: { username },
-      select: { id: true }
-    })
-    return !!user
+      select: { id: true },
+    });
+    return !!user;
   }
 
   /**
@@ -200,9 +203,9 @@ export class UserService {
   static async isEmailExists(email: string): Promise<boolean> {
     const user = await prisma.next_base_user.findUnique({
       where: { email },
-      select: { id: true }
-    })
-    return !!user
+      select: { id: true },
+    });
+    return !!user;
   }
 
   /**
@@ -211,8 +214,8 @@ export class UserService {
   static async isPhoneExists(phone: string): Promise<boolean> {
     const user = await prisma.next_base_user.findUnique({
       where: { phone },
-      select: { id: true }
-    })
-    return !!user
+      select: { id: true },
+    });
+    return !!user;
   }
-} 
+}

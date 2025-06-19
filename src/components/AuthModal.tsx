@@ -1,11 +1,13 @@
 'use client';
 
+import { LockOutlined, MailOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Modal, Tabs, message } from 'antd';
+
 import React, { useState } from 'react';
-import { Modal, Tabs, Form, Input, Button, message } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
+
 import { useAuthStore } from '../store/authStore';
-import PasswordStrengthIndicator from './PasswordStrengthIndicator';
 import { validatePasswordStrength } from '../utils/passwordValidation';
+import PasswordStrengthIndicator from './PasswordStrengthIndicator';
 
 interface AuthModalProps {
   open: boolean;
@@ -13,14 +15,14 @@ interface AuthModalProps {
 }
 
 interface LoginForm {
-  account: string;  // 改为通用账号字段，支持邮箱、手机号、用户名
+  account: string; // 改为通用账号字段，支持邮箱、手机号、用户名
   password: string;
 }
 
 interface RegisterForm {
   username: string;
   email: string;
-  phone?: string;     // 手机号选填
+  phone?: string; // 手机号选填
   password: string;
   confirmPassword: string;
 }
@@ -50,7 +52,7 @@ export default function AuthModal({ open, onCancel }: AuthModalProps) {
   const handleLogin = async (values: LoginForm) => {
     try {
       setLoading(true);
-      
+
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
@@ -80,7 +82,7 @@ export default function AuthModal({ open, onCancel }: AuthModalProps) {
   const handleRegister = async (values: RegisterForm) => {
     try {
       setLoading(true);
-      
+
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
@@ -145,35 +147,13 @@ export default function AuthModal({ open, onCancel }: AuthModalProps) {
       label: '登录',
       children: (
         <div className="px-4 py-6">
-          <Form
-            form={loginForm}
-            name="login"
-            onFinish={handleLogin}
-            layout="vertical"
-            size="large"
-          >
-            <Form.Item
-              name="account"
-              rules={[
-                { required: true, message: '请输入账号！' },
-              ]}
-            >
-              <Input
-                prefix={<UserOutlined />}
-                placeholder="邮箱/手机号/用户名"
-                className="h-12"
-              />
+          <Form form={loginForm} name="login" onFinish={handleLogin} layout="vertical" size="large">
+            <Form.Item name="account" rules={[{ required: true, message: '请输入账号！' }]}>
+              <Input prefix={<UserOutlined />} placeholder="邮箱/手机号/用户名" className="h-12" />
             </Form.Item>
 
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: '请输入密码！' }]}
-            >
-              <Input.Password
-                prefix={<LockOutlined />}
-                placeholder="密码"
-                className="h-12"
-              />
+            <Form.Item name="password" rules={[{ required: true, message: '请输入密码！' }]}>
+              <Input.Password prefix={<LockOutlined />} placeholder="密码" className="h-12" />
             </Form.Item>
 
             <div className="text-center mb-4">
@@ -214,65 +194,45 @@ export default function AuthModal({ open, onCancel }: AuthModalProps) {
               name="username"
               rules={[
                 { required: true, message: '请输入用户名！' },
-                { min: 3, message: '用户名至少3个字符！' }
+                { min: 3, message: '用户名至少3个字符！' },
               ]}
             >
-              <Input
-                prefix={<UserOutlined />}
-                placeholder="用户名"
-                className="h-12"
-              />
+              <Input prefix={<UserOutlined />} placeholder="用户名" className="h-12" />
             </Form.Item>
 
             <Form.Item
               name="email"
               rules={[
                 { required: true, message: '请输入邮箱！' },
-                { type: 'email', message: '请输入有效的邮箱地址！' }
+                { type: 'email', message: '请输入有效的邮箱地址！' },
               ]}
             >
-              <Input
-                prefix={<MailOutlined />}
-                placeholder="Email"
-                className="h-12"
-              />
+              <Input prefix={<MailOutlined />} placeholder="Email" className="h-12" />
             </Form.Item>
 
             <Form.Item
               name="phone"
               rules={[
-                { 
-                  pattern: /^[\d+\-\s()]{10,}$/, 
-                  message: '请输入有效的手机号码！' 
-                }
+                {
+                  pattern: /^[\d+\-\s()]{10,}$/,
+                  message: '请输入有效的手机号码！',
+                },
               ]}
             >
-              <Input
-                prefix={<PhoneOutlined />}
-                placeholder="手机号（选填）"
-                className="h-12"
-              />
+              <Input prefix={<PhoneOutlined />} placeholder="手机号（选填）" className="h-12" />
             </Form.Item>
 
-            <Form.Item
-              name="password"
-              rules={[
-                { validator: passwordValidator }
-              ]}
-            >
+            <Form.Item name="password" rules={[{ validator: passwordValidator }]}>
               <Input.Password
                 prefix={<LockOutlined />}
                 placeholder="密码"
                 className="h-12"
-                onChange={(e) => setPasswordValue(e.target.value)}
+                onChange={e => setPasswordValue(e.target.value)}
               />
             </Form.Item>
 
             {/* 密码强度指示器 */}
-            <PasswordStrengthIndicator 
-              password={passwordValue} 
-              className="mb-4"
-            />
+            <PasswordStrengthIndicator password={passwordValue} className="mb-4" />
 
             <Form.Item
               name="confirmPassword"
@@ -289,11 +249,7 @@ export default function AuthModal({ open, onCancel }: AuthModalProps) {
                 }),
               ]}
             >
-              <Input.Password
-                prefix={<LockOutlined />}
-                placeholder="确认密码"
-                className="h-12"
-              />
+              <Input.Password prefix={<LockOutlined />} placeholder="确认密码" className="h-12" />
             </Form.Item>
 
             <Form.Item>
@@ -333,7 +289,7 @@ export default function AuthModal({ open, onCancel }: AuthModalProps) {
           {activeTab === 'login' ? '登录' : '注册'}
         </h2>
       </div>
-      
+
       <Tabs
         activeKey={activeTab}
         onChange={setActiveTab}
@@ -343,4 +299,4 @@ export default function AuthModal({ open, onCancel }: AuthModalProps) {
       />
     </Modal>
   );
-} 
+}

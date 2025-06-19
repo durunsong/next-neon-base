@@ -1,6 +1,6 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import { FlatCompat } from '@eslint/eslintrc';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -10,24 +10,24 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     ignores: [
       // 依赖目录
-      "node_modules/**",
+      'node_modules/**',
       // 构建输出
-      ".next/**",
-      "out/**",
-      "dist/**",
-      "build/**",
+      '.next/**',
+      'out/**',
+      'dist/**',
+      'build/**',
       // Prisma生成的文件
-      "prisma/generated/**",
-      "src/generated/**",
+      'prisma/generated/**',
+      'src/generated/**',
       // 其他生成的文件
-      "**/*.d.ts",
-      "next-env.d.ts",
+      '**/*.d.ts',
+      'next-env.d.ts',
       // 日志文件
-      "**/*.log",
+      '**/*.log',
     ],
   },
 ];

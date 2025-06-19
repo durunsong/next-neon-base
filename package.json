@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "pre-deploy": "pnpm lint && pnpm type-check && pnpm build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "pre-commit": "lint-staged",
+    "pre-deploy": "pnpm lint && pnpm type-check && pnpm format:check && pnpm build",
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
@@ -17,7 +20,8 @@
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
     "db:sync": "prisma db pull && prisma generate",
-    "db:dev-push": "prisma db push && prisma generate"
+    "db:dev-push": "prisma db push && prisma generate",
+    "prepare": "husky"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
@@ -33,9 +37,19 @@
     "react-dom": "^19.0.0",
     "zustand": "^5.0.5"
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,scss}": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/bcryptjs": "^3.0.0",
     "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.9",
@@ -44,6 +58,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.5.3",
     "tailwindcss": "^4",
     "tsx": "^4.20.3",
     "typescript": "^5"

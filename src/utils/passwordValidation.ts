@@ -3,7 +3,7 @@ export enum PasswordStrength {
   WEAK = 'weak',
   MEDIUM = 'medium',
   STRONG = 'strong',
-  VERY_STRONG = 'very_strong'
+  VERY_STRONG = 'very_strong',
 }
 
 // 密码强度结果
@@ -27,7 +27,7 @@ export function checkPasswordStrength(password: string): PasswordStrengthResult 
       score: 0,
       message: '密码过短',
       suggestions: ['密码至少需要6个字符'],
-      isValid: false
+      isValid: false,
     };
   }
 
@@ -65,7 +65,8 @@ export function checkPasswordStrength(password: string): PasswordStrengthResult 
   }
 
   // 避免常见模式
-  if (!/(.)\1{2,}/.test(password)) { // 没有连续相同字符
+  if (!/(.)\1{2,}/.test(password)) {
+    // 没有连续相同字符
     score += 5;
   } else {
     suggestions.push('避免连续相同字符');
@@ -99,23 +100,23 @@ export function checkPasswordStrength(password: string): PasswordStrengthResult 
     score,
     message,
     suggestions,
-    isValid
+    isValid,
   };
 }
 
 // 密码强度验证（用于表单验证）
 export function validatePasswordStrength(password: string): { isValid: boolean; message: string } {
   const result = checkPasswordStrength(password);
-  
+
   if (!result.isValid) {
     return {
       isValid: false,
-      message: `密码强度不足（${result.message}）`
+      message: `密码强度不足（${result.message}）`,
     };
   }
 
   return {
     isValid: true,
-    message: ''
+    message: '',
   };
-} 
+}

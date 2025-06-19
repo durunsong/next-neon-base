@@ -1,0 +1,9 @@
+echo "🔍 Checking commit message..."
+
+# 检查提交信息长度
+if [ ${#1} -lt 10 ]; then
+    echo "❌ Commit message too short. Please provide a meaningful commit message (at least 10 characters)."
+    exit 1
+fi
+
+echo "✅ Commit message looks good!" 

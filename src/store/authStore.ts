@@ -1,6 +1,6 @@
+import Cookies from 'js-cookie';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import Cookies from 'js-cookie';
 
 // 用户信息类型
 export interface User {
@@ -30,7 +30,7 @@ interface AuthActions {
 // 创建认证store
 export const useAuthStore = create<AuthState & AuthActions>()(
   persist(
-    (set) => ({
+    set => ({
       // 初始状态
       user: null,
       token: null,
@@ -43,13 +43,13 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         Cookies.set('auth_token_local', token, {
           expires: 1, // 1天
           sameSite: 'strict',
-          secure: process.env.NODE_ENV === 'production'
+          secure: process.env.NODE_ENV === 'production',
         });
-        
+
         Cookies.set('auth_userInfo_local', JSON.stringify(user), {
           expires: 1, // 1天
           sameSite: 'strict',
-          secure: process.env.NODE_ENV === 'production'
+          secure: process.env.NODE_ENV === 'production',
         });
 
         // 更新store状态
@@ -57,7 +57,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           user,
           token,
           isAuthenticated: true,
-          isLoading: false
+          isLoading: false,
         });
       },
 
@@ -72,7 +72,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           user: null,
           token: null,
           isAuthenticated: false,
-          isLoading: false
+          isLoading: false,
         });
       },
 
@@ -86,14 +86,14 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         try {
           const token = Cookies.get('auth_token_local');
           const userStr = Cookies.get('auth_userInfo_local');
-          
+
           if (token && userStr) {
             const user = JSON.parse(userStr);
             set({
               user,
               token,
               isAuthenticated: true,
-              isLoading: false
+              isLoading: false,
             });
           }
         } catch (error) {
@@ -102,16 +102,16 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           Cookies.remove('auth_token_local');
           Cookies.remove('auth_userInfo_local');
         }
-      }
+      },
     }),
     {
       name: 'auth-storage',
       // 只持久化基本信息，不持久化isLoading
-      partialize: (state) => ({
+      partialize: state => ({
         user: state.user,
         token: state.token,
-        isAuthenticated: state.isAuthenticated
-      })
+        isAuthenticated: state.isAuthenticated,
+      }),
     }
   )
-); 
+);

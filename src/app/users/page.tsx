@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "用户管理",
-  description: "用户列表和管理功能页面",
+  title: '用户管理',
+  description: '用户列表和管理功能页面',
   openGraph: {
-    title: "用户管理 - Next Neon Base",
-    description: "管理系统用户信息",
+    title: '用户管理 - Next Neon Base',
+    description: '管理系统用户信息',
   },
 };
 
@@ -15,12 +15,10 @@ export default function UsersPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow-md p-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">用户管理</h1>
-          
+
           <div className="mb-6">
-            <p className="text-gray-600 mb-4">
-              这里是用户管理页面，可以查看和管理系统用户。
-            </p>
-            
+            <p className="text-gray-600 mb-4">这里是用户管理页面，可以查看和管理系统用户。</p>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h3 className="font-semibold text-blue-900">API 接口</h3>
@@ -48,7 +46,7 @@ export default function UsersPage() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-gray-50 rounded-lg p-4">
             <h2 className="text-xl font-semibold text-gray-900 mb-3">功能特性</h2>
             <ul className="space-y-2 text-gray-600">
@@ -64,4 +62,4 @@ export default function UsersPage() {
       </div>
     </div>
   );
-} 
+}

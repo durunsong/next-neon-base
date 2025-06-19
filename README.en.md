@@ -125,13 +125,13 @@ Open [http://localhost:3000](http://localhost:3000) to view the project.
 
 ### User Management APIs
 
-| Method | Path | Description | Parameters |
-|--------|------|-------------|------------|
-| `GET` | `/api/users` | Get user list | `page`, `pageSize` |
-| `POST` | `/api/users` | Create new user | User info JSON |
-| `GET` | `/api/users/[id]` | Get single user | User ID |
-| `PUT` | `/api/users/[id]` | Update user info | User ID + update data |
-| `DELETE` | `/api/users/[id]` | Delete user (soft delete) | User ID |
+| Method   | Path              | Description               | Parameters            |
+| -------- | ----------------- | ------------------------- | --------------------- |
+| `GET`    | `/api/users`      | Get user list             | `page`, `pageSize`    |
+| `POST`   | `/api/users`      | Create new user           | User info JSON        |
+| `GET`    | `/api/users/[id]` | Get single user           | User ID               |
+| `PUT`    | `/api/users/[id]` | Update user info          | User ID + update data |
+| `DELETE` | `/api/users/[id]` | Delete user (soft delete) | User ID               |
 
 ### Request Examples
 
@@ -228,17 +228,17 @@ DATABASE_URL=postgresql://your-neon-connection-string
 Check `src/examples/userExample.ts` to learn how to call API endpoints from frontend:
 
 ```typescript
-import { UserApiClient } from '../examples/userExample'
+import { UserApiClient } from '../examples/userExample';
 
 // Get user list
-const users = await UserApiClient.getUsers(1, 10)
+const users = await UserApiClient.getUsers(1, 10);
 
 // Create new user
 const newUser = await UserApiClient.createUser({
   username: 'testuser',
   email: 'test@example.com',
-  password_hash: 'hashed_password'
-})
+  password_hash: 'hashed_password',
+});
 ```
 
 ## 🐛 Troubleshooting
@@ -246,11 +246,13 @@ const newUser = await UserApiClient.createUser({
 ### Common Issues
 
 1. **Prisma client not generated**
+
    ```bash
    pnpm db:generate
    ```
 
 2. **Database connection failed**
+
    - Check `DATABASE_URL` in `.env` file
    - Ensure Neon database is running properly
 
@@ -280,7 +282,8 @@ This project is open source under the MIT License. See `LICENSE` file for more i
 ---
 
 **Note**: This is a sample project for learning and development purposes. When using in production, please ensure:
+
 - Use proper password encryption algorithms
 - Implement appropriate authentication and authorization mechanisms
 - Add API rate limiting and security measures
-- Conduct thorough testing and error handling 
+- Conduct thorough testing and error handling

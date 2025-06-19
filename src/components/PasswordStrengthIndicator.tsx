@@ -1,17 +1,19 @@
 'use client';
 
-import React from 'react';
 import { Progress } from 'antd';
-import { checkPasswordStrength, PasswordStrength } from '../utils/passwordValidation';
+
+import React from 'react';
+
+import { PasswordStrength, checkPasswordStrength } from '../utils/passwordValidation';
 
 interface PasswordStrengthIndicatorProps {
   password: string;
   className?: string;
 }
 
-export default function PasswordStrengthIndicator({ 
-  password, 
-  className = '' 
+export default function PasswordStrengthIndicator({
+  password,
+  className = '',
 }: PasswordStrengthIndicatorProps) {
   // 如果密码为空，不显示任何内容
   if (!password) {
@@ -42,7 +44,7 @@ export default function PasswordStrengthIndicator({
     return {
       color,
       fontWeight: 'bold' as const,
-      fontSize: '12px'
+      fontSize: '12px',
     };
   };
 
@@ -58,9 +60,7 @@ export default function PasswordStrengthIndicator({
           showInfo={false}
           className="flex-1"
         />
-        <span style={getTextStyle(result.strength)}>
-          {result.message}
-        </span>
+        <span style={getTextStyle(result.strength)}>{result.message}</span>
       </div>
 
       {/* 建议列表 */}
@@ -87,4 +87,4 @@ export default function PasswordStrengthIndicator({
       )}
     </div>
   );
-} 
+}

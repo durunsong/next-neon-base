@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import { usePathname } from 'next/navigation';
 
 // 这种方式不推荐，仅作为示例
@@ -52,4 +53,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-*/ 
+*/

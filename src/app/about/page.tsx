@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "关于我们",
-  description: "了解 Next Neon Base 项目的详细信息、技术架构和开发团队",
-  keywords: ["关于", "技术架构", "开发团队", "项目介绍"],
+  title: '关于我们',
+  description: '了解 Next Neon Base 项目的详细信息、技术架构和开发团队',
+  keywords: ['关于', '技术架构', '开发团队', '项目介绍'],
   openGraph: {
-    title: "关于我们 - Next Neon Base",
-    description: "了解项目背景和技术架构",
+    title: '关于我们 - Next Neon Base',
+    description: '了解项目背景和技术架构',
   },
 };
 
@@ -20,11 +20,9 @@ export default function AboutPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               关于 Next Neon Base
             </h1>
-            <p className="text-xl text-gray-600">
-              现代化的全栈用户管理系统解决方案
-            </p>
+            <p className="text-xl text-gray-600">现代化的全栈用户管理系统解决方案</p>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">🎯 项目愿景</h2>
@@ -33,19 +31,29 @@ export default function AboutPage() {
                 我们使用最新的技术栈，让开发者能够快速构建可扩展的Web应用程序。
               </p>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">🛠️ 技术架构</h2>
               <ul className="space-y-2 text-gray-600">
-                <li>• <strong>前端:</strong> Next.js 15 + TypeScript</li>
-                <li>• <strong>样式:</strong> Tailwind CSS 4.0</li>
-                <li>• <strong>数据库:</strong> Neon PostgreSQL</li>
-                <li>• <strong>ORM:</strong> Prisma</li>
-                <li>• <strong>部署:</strong> Vercel</li>
+                <li>
+                  • <strong>前端:</strong> Next.js 15 + TypeScript
+                </li>
+                <li>
+                  • <strong>样式:</strong> Tailwind CSS 4.0
+                </li>
+                <li>
+                  • <strong>数据库:</strong> Neon PostgreSQL
+                </li>
+                <li>
+                  • <strong>ORM:</strong> Prisma
+                </li>
+                <li>
+                  • <strong>部署:</strong> Vercel
+                </li>
               </ul>
             </div>
           </div>
-          
+
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">✨ 核心特性</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -97,21 +105,19 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">🚀 开始使用</h2>
-            <p className="mb-6">
-              立即体验 Next Neon Base，构建你的下一个项目
-            </p>
+            <p className="mb-6">立即体验 Next Neon Base，构建你的下一个项目</p>
             <div className="space-x-4">
-              <Link 
-                href="/users" 
+              <Link
+                href="/users"
                 className="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 查看用户管理
               </Link>
-              <a 
-                href="https://github.com/durunsong/next-neon-base" 
+              <a
+                href="https://github.com/durunsong/next-neon-base"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
@@ -124,4 +130,4 @@ export default function AboutPage() {
       </div>
     </div>
   );
-} 
+}
