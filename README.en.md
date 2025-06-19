@@ -1,8 +1,8 @@
-# Next.js + Prisma + Neon User Management System
+# Next.js + Prisma + Neon Template Framework
 
 [中文文档](./README.md) | **English Documentation**
 
-A modern user management system built with Next.js 15, Prisma ORM, and Neon cloud database. This project provides complete user CRUD operation API endpoints, supporting user registration, login, and information management.
+A modern Template Framework built with Next.js 15, Prisma ORM, and Neon cloud database. This project provides complete user CRUD operation API endpoints, supporting user registration, login, and information management.
 
 ## 🚀 Tech Stack
 
@@ -14,10 +14,11 @@ A modern user management system built with Next.js 15, Prisma ORM, and Neon clou
 - **Styling**: Tailwind CSS 4.0
 - **Code Standards**: ESLint + TypeScript ESLint
 - **Deployment**: Vercel
+- - **UI Framework**: Antd 5.26
 
 ## ✨ Features
 
-- 🔐 Complete user management system
+- 🔐 Complete Template Framework
 - 🏗️ RESTful API design
 - 🎯 Type-safe TypeScript support
 - 🗄️ Prisma ORM database operations
