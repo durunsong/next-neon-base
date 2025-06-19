@@ -180,6 +180,9 @@ pnpm db:push      # 推送 schema 到数据库
 pnpm db:pull      # 从数据库拉取 schema
 pnpm db:migrate   # 运行数据库迁移
 pnpm db:studio    # 打开 Prisma Studio
+pnpm db:seed      # 运行数据库种子数据
+pnpm db:sync      # 同步数据库结构并生成客户端 --从数据库同步到代码
+pnpm db:dev-push  # 快速推送+生成 -- 开发环境快速原型
 ```
 
 ## 🔧 数据库管理

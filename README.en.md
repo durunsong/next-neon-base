@@ -180,6 +180,9 @@ pnpm db:push      # Push schema to database
 pnpm db:pull      # Pull schema from database
 pnpm db:migrate   # Run database migrations
 pnpm db:studio    # Open Prisma Studio
+pnpm  db:seed     # Running database seed data
+pnpm db:sync      # Synchronize database structure and generate clients -- Synchronization from database to code
+pnpm db:dev-push  # Rapid Push + Generation -- Rapid Prototyping for Development Environments
 ```
 
 ## 🔧 Database Management

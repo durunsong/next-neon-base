@@ -16,7 +16,8 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
-    "db:sync": "prisma db pull && prisma generate"
+    "db:sync": "prisma db pull && prisma generate",
+    "db:dev-push": "prisma db push && prisma generate"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
