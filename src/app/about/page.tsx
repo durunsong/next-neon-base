@@ -27,7 +27,7 @@ export default function AboutPage() {
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">🎯 项目愿景</h2>
               <p className="text-gray-600 leading-relaxed">
-                Next Neon Base 致力于提供一个现代化、类型安全、高性能的用户管理系统模板。
+                Next Neon Base 致力于提供一个现代化、类型安全、高性能的模版框架。
                 我们使用最新的技术栈，让开发者能够快速构建可扩展的Web应用程序。
               </p>
             </div>
