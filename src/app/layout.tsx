@@ -20,14 +20,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     template: '%s | Next Neon Base',
-    default: 'Next Neon Base - 用户管理系统',
+    default: 'Next Neon Base - 基础模板',
   },
-  description: '基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化用户管理系统',
-  keywords: ['Next.js', 'Prisma', 'Neon', '用户管理', 'TypeScript'],
-  authors: [{ name: 'Your Name' }],
-  creator: 'Your Name',
-  publisher: 'Your Name',
-  metadataBase: new URL('https://your-domain.vercel.app'),
+  description: '基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化基础模板',
+  keywords: ['Next.js', 'Prisma', 'Neon', '基础模板', 'TypeScript'],
+  authors: [{ name: 'Du Run song' }],
+  creator: 'Du Run song',
+  publisher: 'Du Run song',
+  metadataBase: new URL('https://next-neon-base.vercel.app'),
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
