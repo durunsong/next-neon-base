@@ -1,4 +1,4 @@
-# Next.js + Prisma + Neon 用户管理系统
+# Next.js + Prisma + Neon 模版框架
 
 **中文文档** | [English Documentation](./README.en.md)
 

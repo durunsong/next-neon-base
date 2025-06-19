@@ -20,7 +20,7 @@ export default function AboutPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               关于 Next Neon Base
             </h1>
-            <p className="text-xl text-gray-600">现代化的全栈用户管理系统解决方案</p>
+            <p className="text-xl text-gray-600">现代化的全栈模版框架解决方案</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">

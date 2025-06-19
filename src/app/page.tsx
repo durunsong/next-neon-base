@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '首页',
-  description: 'Next.js + Prisma + Neon 用户管理系统的首页',
+  description: 'Next.js + Prisma + Neon 模版框架的首页',
   openGraph: {
     title: 'Next Neon Base - 首页',
-    description: '现代化的用户管理系统首页',
+    description: '现代化的模版框架首页',
   },
 };
 
@@ -16,7 +16,7 @@ export default function Home() {
         <main className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">Next Neon Base</h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化用户管理系统
+            基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化模版框架
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
