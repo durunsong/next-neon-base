@@ -7,6 +7,7 @@ export interface User {
   id: string;
   username: string;
   email?: string | null;
+  phone?: string | null; // 添加手机号字段
   role?: string | null;
   avatar_url?: string | null;
 }
@@ -17,6 +18,7 @@ interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isInitialized: boolean; // 是否已初始化认证状态
 }
 
 // 认证操作类型
@@ -25,6 +27,7 @@ interface AuthActions {
   logout: () => void;
   setLoading: (loading: boolean) => void;
   initAuth: () => void;
+  updateUser: (userUpdate: Partial<User>) => void; // 新增：更新用户信息
 }
 
 // 创建认证store
@@ -36,6 +39,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       token: null,
       isAuthenticated: false,
       isLoading: false,
+      isInitialized: false,
 
       // 登录操作
       login: (user: User, token: string) => {
@@ -58,6 +62,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           token,
           isAuthenticated: true,
           isLoading: false,
+          isInitialized: true,
         });
       },
 
@@ -73,6 +78,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           token: null,
           isAuthenticated: false,
           isLoading: false,
+          isInitialized: true,
         });
       },
 
@@ -94,6 +100,16 @@ export const useAuthStore = create<AuthState & AuthActions>()(
               token,
               isAuthenticated: true,
               isLoading: false,
+              isInitialized: true,
+            });
+          } else {
+            // 没有认证信息，标记为已初始化但未认证
+            set({
+              user: null,
+              token: null,
+              isAuthenticated: false,
+              isLoading: false,
+              isInitialized: true,
             });
           }
         } catch (error) {
@@ -101,12 +117,40 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           // 如果解析失败，清除可能损坏的数据
           Cookies.remove('auth_token_local');
           Cookies.remove('auth_userInfo_local');
+          set({
+            user: null,
+            token: null,
+            isAuthenticated: false,
+            isLoading: false,
+            isInitialized: true,
+          });
         }
+      },
+
+      // 更新用户信息
+      updateUser: (userUpdate: Partial<User>) => {
+        set(state => {
+          if (!state.user) return state;
+
+          const updatedUser = { ...state.user, ...userUpdate };
+
+          // 同步更新cookie
+          Cookies.set('auth_userInfo_local', JSON.stringify(updatedUser), {
+            expires: 1,
+            sameSite: 'strict',
+            secure: process.env.NODE_ENV === 'production',
+          });
+
+          return {
+            ...state,
+            user: updatedUser,
+          };
+        });
       },
     }),
     {
       name: 'auth-storage',
-      // 只持久化基本信息，不持久化isLoading
+      // 只持久化基本信息，不持久化isLoading和isInitialized
       partialize: state => ({
         user: state.user,
         token: state.token,

@@ -63,10 +63,9 @@ export default function Navigation() {
     {
       key: 'profile',
       icon: <UserOutlined />,
-      label: '个人资料',
+      label: '个人中心',
       onClick: () => {
-        // 这里可以跳转到个人资料页面
-        message.info('个人资料功能即将推出');
+        window.location.href = '/profile';
       },
     },
     {
@@ -202,6 +201,15 @@ export default function Navigation() {
                   {isAuthenticated && user ? (
                     <div className="px-3 py-2 space-y-2">
                       <p className="text-sm text-gray-600">欢迎，{user.username}!</p>
+                      <Link
+                        href="/profile"
+                        className="block w-full"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Button type="default" size="small" className="w-full">
+                          个人中心
+                        </Button>
+                      </Link>
                       <Button type="default" size="small" onClick={handleLogout} className="w-full">
                         登出
                       </Button>
