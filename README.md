@@ -60,6 +60,14 @@ DATABASE_URL="postgresql://用户名:密码@端点/数据库名?sslmode=require"
 # Next.js 配置（可选）
 NEXTAUTH_SECRET="your-nextauth-secret-key"
 NEXTAUTH_URL="http://localhost:3000"
+
+# 阿里云OSS:// 配置opment"
+OSS_ACCESS_KEY_ID="AccessKey ID"
+OSS_ACCESS_KEY_SECRET="AccessKey Secret"
+OSS_REGION="oss-rg-china-mainland" # OSS 存储所在的 地域（region）标识
+OSS_BUCKET="next-static-oss"  #  Bucket（存储空间）名字
+BASE_OSS_URL="https://next-static-oss.oss-rg-china-mainland.aliyuncs.com" #OSS 的公共访问 基础 URL
+
 ```
 
 ### 2. 数据库表结构

@@ -60,6 +60,14 @@ DATABASE_URL="postgresql://username:password@endpoint/database?sslmode=require"
 # Next.js configuration (optional)
 NEXTAUTH_SECRET="your-nextauth-secret-key"
 NEXTAUTH_URL="http://localhost:3000"
+
+# AliCloudOSS:// configurationopment"
+OSS_ACCESS_KEY_ID="AccessKey ID"
+OSS_ACCESS_KEY_SECRET="AccessKey Secret"
+OSS_REGION="oss-rg-china-mainland" # The region (region) identifier of the OSS storage. Region identifier where OSS storage is located
+OSS_BUCKET="next-static-oss" # Bucket name
+BASE_OSS_URL="https://next-static-oss.oss-rg-china-mainland.aliyuncs.com " # Public access base URL for OSS
+
 ```
 
 ### 2. Database Schema
