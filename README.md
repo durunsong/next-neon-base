@@ -1,8 +1,8 @@
-# Next.js + Prisma + Neon 模版框架
+# Next.js + Prisma + Neon 基础模版框架
 
 **中文文档** | [English Documentation](./README.en.md)
 
-这是一个基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化模版框架。项目提供了完整的用户 CRUD 操作 API 接口，支持用户注册、登录、信息管理等功能。
+这是一个基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化基础模版框架。项目提供了完整的用户 CRUD 操作 API 接口，支持用户注册、登录、信息管理等功能。
 
 ## 🚀 技术栈
 
@@ -18,7 +18,7 @@
 
 ## ✨ 功能特性
 
-- 🔐 完整的模版框架
+- 🔐 完整的基础模版框架
 - 🏗️ RESTful API 接口设计
 - 🎯 类型安全的 TypeScript 支持
 - 🗄️ Prisma ORM 数据库操作
@@ -94,7 +94,7 @@ CREATE TABLE next_base_user (
 ### 1. 克隆项目
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/durunsong/next-neon-base.git
 cd next-neon-base
 ```
 

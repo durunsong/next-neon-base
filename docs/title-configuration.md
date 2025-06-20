@@ -18,9 +18,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: {
     template: '%s | Next Neon Base', // 页面标题模板
-    default: 'Next Neon Base - 模版框架', // 默认标题
+    default: 'Next Neon Base - 基础模版框架', // 默认标题
   },
-  description: '基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化模版框架',
+  description: '基于 Next.js 15、Prisma ORM 和 Neon 云数据库的现代化基础模版框架',
   keywords: ['Next.js', 'Prisma', 'Neon', '用户管理', 'TypeScript'],
   icons: {
     icon: '/favicon.ico',
@@ -45,7 +45,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '首页', // 最终显示为：首页 | Next Neon Base
-  description: 'Next.js + Prisma + Neon 模版框架的首页',
+  description: 'Next.js + Prisma + Neon 基础模版框架的首页',
 };
 ```
 
@@ -99,7 +99,7 @@ export async function generateMetadata({
 | `/users`     | 用户管理 \| Next Neon Base         |
 | `/users/1`   | admin - 用户详情 \| Next Neon Base |
 | `/about`     | 关于我们 \| Next Neon Base         |
-| 未设置的页面 | Next Neon Base - 模版框架          |
+| 未设置的页面 | Next Neon Base - 基础模版框架      |
 
 ## 📱 更多 Metadata 选项
 

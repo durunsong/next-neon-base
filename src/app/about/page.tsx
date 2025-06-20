@@ -20,14 +20,14 @@ export default function AboutPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               关于 Next Neon Base
             </h1>
-            <p className="text-xl text-gray-600">现代化的全栈模版框架解决方案</p>
+            <p className="text-xl text-gray-600">现代化的全栈基础模版框架解决方案</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">🎯 项目愿景</h2>
               <p className="text-gray-600 leading-relaxed">
-                Next Neon Base 致力于提供一个现代化、类型安全、高性能的模版框架。
+                Next Neon Base 致力于提供一个现代化、类型安全、高性能的基础模版框架。
                 我们使用最新的技术栈，让开发者能够快速构建可扩展的Web应用程序。
               </p>
             </div>

@@ -27,4 +27,19 @@ model next_base_user {
   updated_at    DateTime? @default(now()) @db.Timestamp(6)
 }
 
-
+model users {
+  id          Int      @id @default(autoincrement())
+  account     String   @db.VarChar(50)
+  create_time DateTime @db.Timestamp(6)
+  is_delete   Int      @default(0) @db.SmallInt
+  password    String   @db.VarChar(255)
+  update_time DateTime @db.Timestamp(6)
+  description String?
+  user_name   String?  @db.VarChar(50)
+  nick_name   String?  @db.VarChar(50)
+  role_ids    Json?
+  avatar      String?  @db.VarChar(255)
+  uuid        String   @db.Uuid
+  token       String?  @db.VarChar(255)
+  roles       Json?
+}

@@ -1,8 +1,8 @@
-# Next.js + Prisma + Neon Template Framework
+# Next.js + Prisma + Neon Basic Template Framework
 
 [中文文档](./README.md) | **English Documentation**
 
-A modern Template Framework built with Next.js 15, Prisma ORM, and Neon cloud database. This project provides complete user CRUD operation API endpoints, supporting user registration, login, and information management.
+A modern Basic Template Framework built with Next.js 15, Prisma ORM, and Neon cloud database. This project provides complete user CRUD operation API endpoints, supporting user registration, login, and information management.
 
 ## 🚀 Tech Stack
 
@@ -18,7 +18,7 @@ A modern Template Framework built with Next.js 15, Prisma ORM, and Neon cloud da
 
 ## ✨ Features
 
-- 🔐 Complete Template Framework
+- 🔐 Complete Basic Template Framework
 - 🏗️ RESTful API design
 - 🎯 Type-safe TypeScript support
 - 🗄️ Prisma ORM database operations
@@ -94,7 +94,7 @@ CREATE TABLE next_base_user (
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/durunsong/next-neon-base.git
 cd next-neon-base
 ```
 
