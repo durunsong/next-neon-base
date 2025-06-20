@@ -6,7 +6,7 @@ import { Avatar, Button, Dropdown, message } from 'antd';
 import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { useAuthStore } from '../store/authStore';
 import AuthModal from './AuthModal';
@@ -15,6 +15,7 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const { user, isAuthenticated, logout, initAuth } = useAuthStore();
 
@@ -65,7 +66,7 @@ export default function Navigation() {
       icon: <UserOutlined />,
       label: '个人中心',
       onClick: () => {
-        window.location.href = '/profile';
+        router.push('/profile');
       },
     },
     {
