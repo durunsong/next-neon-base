@@ -39,11 +39,10 @@ next-neon-base/
 │   │   └── prisma.ts          # Prisma 客户端连接实例
 │   ├── services/
 │   │   └── userService.ts     # 用户数据操作服务类
-│   ├── app/
-│   │   └── api/
-│   │       └── users/         # 用户相关 API 路由
-│   └── examples/
-│       └── userExample.ts     # API 使用示例
+│   └──── app/
+│         └── api/
+│              └── users/         # 用户相关 API 路由
+│
 ├── .env                       # 环境变量配置
 └── package.json              # 项目依赖和脚本
 ```
@@ -222,24 +221,6 @@ npx prisma migrate reset
 
 ```
 DATABASE_URL=postgresql://your-neon-connection-string
-```
-
-## 📚 使用示例
-
-查看 `src/examples/userExample.ts` 了解如何在前端调用 API 接口：
-
-```typescript
-import { UserApiClient } from '../examples/userExample';
-
-// 获取用户列表
-const users = await UserApiClient.getUsers(1, 10);
-
-// 创建新用户
-const newUser = await UserApiClient.createUser({
-  username: 'testuser',
-  email: 'test@example.com',
-  password_hash: 'hashed_password',
-});
 ```
 
 ## 🐛 故障排除

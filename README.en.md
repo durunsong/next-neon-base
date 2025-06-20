@@ -39,11 +39,10 @@ next-neon-base/
 │   │   └── prisma.ts          # Prisma client connection instance
 │   ├── services/
 │   │   └── userService.ts     # User data operation service
-│   ├── app/
-│   │   └── api/
-│   │       └── users/         # User-related API routes
-│   └── examples/
-│       └── userExample.ts     # API usage examples
+│   └── app/
+│       └── api/
+│            └── users/         # User-related API routes
+│
 ├── .env                       # Environment variables
 └── package.json              # Project dependencies and scripts
 ```
@@ -222,24 +221,6 @@ Add in Vercel project settings Environment Variables:
 
 ```
 DATABASE_URL=postgresql://your-neon-connection-string
-```
-
-## 📚 Usage Examples
-
-Check `src/examples/userExample.ts` to learn how to call API endpoints from frontend:
-
-```typescript
-import { UserApiClient } from '../examples/userExample';
-
-// Get user list
-const users = await UserApiClient.getUsers(1, 10);
-
-// Create new user
-const newUser = await UserApiClient.createUser({
-  username: 'testuser',
-  email: 'test@example.com',
-  password_hash: 'hashed_password',
-});
 ```
 
 ## 🐛 Troubleshooting
