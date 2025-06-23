@@ -113,6 +113,9 @@ export class UserService {
         orderBy: {
           created_at: 'desc',
         },
+        // select: {
+        //   // 排除hash密码字段
+        // },
       }),
       prisma.next_base_user.count({
         where: {

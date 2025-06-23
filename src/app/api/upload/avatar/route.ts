@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken';
-
 import { NextRequest, NextResponse } from 'next/server';
 
 import {
@@ -9,23 +7,15 @@ import {
   uploadToOSS,
 } from '../../../../lib/oss';
 import { UserService } from '../../../../services/userService';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+import { verifyAuth } from '../../../../utils/auth';
 
 // POST /api/upload/avatar - 上传头像
 export async function POST(request: NextRequest) {
   try {
     // 验证用户身份
-    const token = request.cookies.get('auth_token_local')?.value;
-    if (!token) {
-      return NextResponse.json({ success: false, message: '未登录' }, { status: 401 });
-    }
-
-    let decoded;
-    try {
-      decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
-    } catch {
-      return NextResponse.json({ success: false, message: '登录已过期' }, { status: 401 });
+    const auth = await verifyAuth(request);
+    if (!auth.isValid) {
+      return NextResponse.json({ success: false, message: auth.error }, { status: 401 });
     }
 
     // 获取上传的文件
@@ -52,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 获取用户当前头像信息
-    const currentUser = await UserService.getUserById(decoded.userId);
+    const currentUser = await UserService.getUserById(auth.userId!);
     if (!currentUser) {
       return NextResponse.json({ success: false, message: '用户不存在' }, { status: 404 });
     }
@@ -66,7 +56,7 @@ export async function POST(request: NextRequest) {
     const avatarUrl = await uploadToOSS(buffer, fileName);
 
     // 更新用户头像URL到数据库
-    await UserService.updateUser(decoded.userId, {
+    await UserService.updateUser(auth.userId!, {
       avatar_url: avatarUrl,
     });
 

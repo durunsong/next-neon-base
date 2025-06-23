@@ -2,28 +2,10 @@
  * 单个用户API路由
  * 提供特定用户的获取、更新、删除操作
  */
-import jwt from 'jsonwebtoken';
-
 import { NextRequest, NextResponse } from 'next/server';
 
 import { UserService } from '../../../../services/userService';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-
-// 验证用户身份的辅助函数
-async function verifyAuth(request: NextRequest) {
-  const token = request.cookies.get('auth_token_local')?.value;
-  if (!token) {
-    return { isValid: false, error: '未登录' };
-  }
-
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
-    return { isValid: true, userId: decoded.userId };
-  } catch {
-    return { isValid: false, error: '登录已过期' };
-  }
-}
+import { checkUserPermission, verifyAuth } from '../../../../utils/auth';
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -43,7 +25,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }
 
     // 检查用户是否有权限访问（只能访问自己的信息）
-    if (auth.userId !== id) {
+    if (!checkUserPermission(auth.userId!, id)) {
       return NextResponse.json(
         { success: false, message: '无权限访问此用户信息' },
         { status: 403 }
@@ -99,7 +81,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     }
 
     // 检查用户是否有权限修改（只能修改自己的信息）
-    if (auth.userId !== id) {
+    if (!checkUserPermission(auth.userId!, id)) {
       return NextResponse.json(
         { success: false, message: '无权限修改此用户信息' },
         { status: 403 }
@@ -179,7 +161,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     }
 
     // 检查用户是否有权限删除（只能删除自己的账户）
-    if (auth.userId !== id) {
+    if (!checkUserPermission(auth.userId!, id)) {
       return NextResponse.json({ success: false, message: '无权限删除此用户' }, { status: 403 });
     }
 

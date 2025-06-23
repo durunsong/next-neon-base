@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { UserService } from '../../../../services/userService';
 
 // JWT密钥（生产环境应该使用环境变量）
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'x6*Dq!s1V#F&7@pZb3r$QnT+9mYw';
 
 interface LoginRequest {
   account: string; // 改为通用的账号字段，支持邮箱、手机号、用户名
