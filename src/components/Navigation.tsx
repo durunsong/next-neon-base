@@ -28,6 +28,7 @@ export default function Navigation() {
     { href: '/', label: '首页', title: '首页' },
     { href: '/users', label: '用户管理', title: '用户管理页面' },
     { href: '/database', label: '数据库信息', title: '查看数据库版本和统计信息' },
+    { href: '/redis-test', label: 'Redis测试', title: 'Redis功能测试页面' },
     { href: '/about', label: '关于我们', title: '了解项目详情' },
   ];
 
