@@ -62,7 +62,7 @@ import { Redis } from '@upstash/redis';
 
 // 创建Redis客户端实例
 export const redis = new Redis({
-  url: 'redis://default:ASz2AAIjcDFmOTJhYmMyNjI1MmQ0NmIwOGIxYjgyMWMyODA5NTBhOXAxMA@capable-crab-11510.upstash.io:6379',
+  url: '',
 });
 ```
 
