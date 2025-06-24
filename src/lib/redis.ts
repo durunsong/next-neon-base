@@ -3,10 +3,8 @@ import { Redis } from '@upstash/redis';
 // 创建Redis客户端实例
 // Upstash Redis客户端需要使用REST API URL和令牌
 export const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL || 'https://capable-crab-11510.upstash.io',
-  token:
-    process.env.UPSTASH_REDIS_REST_TOKEN ||
-    'ASz2AAIjcDFmOTJhYmMyNjI1MmQ0NmIwOGIxYjgyMWMyODA5NTBhOXAxMA',
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
 });
 
 // 也可以使用自动从环境变量加载的方式
