@@ -10,53 +10,60 @@ export async function GET(request: NextRequest) {
   try {
     // 获取客户端IP
     const ip = request.headers.get('x-forwarded-for') || 'unknown';
-    console.log(`限流测试 - 客户端IP: ${ip}`);
-
     // 应用限流，每60秒最多5次请求
     const requestKey = `ratelimit:${ip}`;
-    console.log(`限流键: ${requestKey}`);
-
     try {
-      // 获取当前请求计数
-      const count = await redis.incr(requestKey);
-      console.log(`当前请求计数: ${count}`);
+      // 检查键是否存在以及剩余过期时间
+      const ttl = await redis.ttl(requestKey);
+      // 如果键不存在(ttl = -2)或已过期(ttl = -1)，则删除并重置
+      if (ttl < 0) {
+        await redis.del(requestKey);
 
-      // 如果是第一次请求，设置过期时间
-      if (count === 1) {
-        await redis.expire(requestKey, 60);
-        console.log(`设置过期时间: 60秒`);
+        // 设置初始计数为1并设置过期时间
+        await redis.set(requestKey, '1', { ex: 60 });
+        // 返回成功响应
+        return NextResponse.json({
+          success: true,
+          message: '请求成功',
+          ip: ip,
+          count: 1,
+          timestamp: new Date().toISOString(),
+        });
       }
 
-      // 如果请求数超过限制，返回429
-      if (count > 5) {
-        console.log(`请求被限流: ${count} > 5`);
+      // 获取当前计数
+      const currentCount = (await redis.get(requestKey)) as string | null;
+      const count = parseInt(currentCount || '0', 10);
+      // 如果已经超过限制
+      if (count >= 5) {
         return NextResponse.json(
           {
             success: false,
             message: '请求频率过高，请稍后再试',
             ip: ip,
-            count: count,
-            retryAfter: '60秒',
+            count: count + 1, // 显示增加后的计数
+            retryAfter: `${ttl}秒`, // 显示实际剩余时间
           },
           {
             status: 429, // Too Many Requests
             headers: {
-              'Retry-After': '60',
+              'Retry-After': String(ttl),
             },
           }
         );
       }
 
-      console.log(`请求允许通过: ${count} <= 5`);
+      // 增加计数
+      const newCount = await redis.incr(requestKey);
+      // 返回成功响应
       return NextResponse.json({
         success: true,
         message: '请求成功',
         ip: ip,
-        count: count,
+        count: newCount,
         timestamp: new Date().toISOString(),
       });
     } catch (redisError) {
-      console.error('Redis操作失败:', redisError);
       return NextResponse.json(
         {
           success: false,
@@ -67,7 +74,6 @@ export async function GET(request: NextRequest) {
       );
     }
   } catch (error) {
-    console.error('限流测试失败:', error);
     return NextResponse.json(
       {
         success: false,
