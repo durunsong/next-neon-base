@@ -30,8 +30,8 @@
 OSS_ACCESS_KEY_ID=你的AccessKeyId
 OSS_ACCESS_KEY_SECRET=你的AccessKeySecret
 OSS_REGION=oss-rg-china-mainland
-OSS_BUCKET=next-static-oss
-BASE_OSS_URL=https://next-static-oss.oss-rg-china-mainland.aliyuncs.com
+OSS_BUCKET=xxxxxxx
+BASE_OSS_URL=https://xxxxxxx.oss-rg-china-mainland.aliyuncs.com
 ```
 
 ### 配置说明：
