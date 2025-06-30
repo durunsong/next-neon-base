@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import {
-  deleteFromOSS,
-  extractFileNameFromUrl,
-  generateFileName,
-  uploadToOSS,
-} from '../../../../lib/oss';
-import { UserService } from '../../../../services/userService';
-import { verifyAuth } from '../../../../utils/auth';
+import { deleteFromOSS, extractFileNameFromUrl, generateFileName, uploadToOSS } from '@/lib/oss';
+import { UserService } from '@/services/userService';
+import { verifyAuth } from '@/utils/auth';
 
 // POST /api/upload/avatar - 上传头像
 export async function POST(request: NextRequest) {

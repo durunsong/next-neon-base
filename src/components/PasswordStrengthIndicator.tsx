@@ -4,7 +4,7 @@ import { Progress } from 'antd';
 
 import React from 'react';
 
-import { PasswordStrength, checkPasswordStrength } from '../utils/passwordValidation';
+import { PasswordStrength, checkPasswordStrength } from '@/utils/passwordValidation';
 
 interface PasswordStrengthIndicatorProps {
   password: string;

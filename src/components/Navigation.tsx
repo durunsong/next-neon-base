@@ -8,7 +8,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '@/store/authStore';
+
 import AuthModal from './AuthModal';
 
 export default function Navigation() {

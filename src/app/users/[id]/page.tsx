@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { UserService } from '../../../services/userService';
+import { UserService } from '@/services/userService';
 
 // 用户数据类型 - 与数据库结构匹配
 interface User {

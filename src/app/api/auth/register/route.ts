@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 
 import { NextRequest, NextResponse } from 'next/server';
 
-import { UserService } from '../../../../services/userService';
-import { validatePasswordStrength } from '../../../../utils/passwordValidation';
+import { UserService } from '@/services/userService';
+import { validatePasswordStrength } from '@/utils/passwordValidation';
 
 interface RegisterRequest {
   username: string;

@@ -4,8 +4,8 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 
-import { UserService } from '../../../../services/userService';
-import { checkUserPermission, verifyAuth } from '../../../../utils/auth';
+import { UserService } from '@/services/userService';
+import { checkUserPermission, verifyAuth } from '@/utils/auth';
 
 interface RouteParams {
   params: Promise<{ id: string }>;

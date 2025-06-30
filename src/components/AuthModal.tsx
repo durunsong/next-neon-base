@@ -5,8 +5,9 @@ import { Button, Form, Input, Modal, Tabs, message } from 'antd';
 
 import React, { useState } from 'react';
 
-import { useAuthStore } from '../store/authStore';
-import { validatePasswordStrength } from '../utils/passwordValidation';
+import { useAuthStore } from '@/store/authStore';
+import { validatePasswordStrength } from '@/utils/passwordValidation';
+
 import PasswordStrengthIndicator from './PasswordStrengthIndicator';
 
 interface AuthModalProps {

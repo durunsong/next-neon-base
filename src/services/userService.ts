@@ -4,7 +4,7 @@
  */
 import type { next_base_user } from '@prisma/client';
 
-import prisma from '../lib/prisma';
+import prisma from '@/lib/prisma';
 
 // 用户创建类型（排除自动生成的字段）
 export type CreateUserInput = {

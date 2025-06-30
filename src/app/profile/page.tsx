@@ -7,8 +7,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import AvatarUpload from '../../components/AvatarUpload';
-import { useAuthStore } from '../../store/authStore';
+import AvatarUpload from '@/components/AvatarUpload';
+import { useAuthStore } from '@/store/authStore';
 
 const { Title, Text } = Typography;
 
