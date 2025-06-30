@@ -65,8 +65,8 @@ NEXTAUTH_URL="http://localhost:3000"
 OSS_ACCESS_KEY_ID="AccessKey ID"
 OSS_ACCESS_KEY_SECRET="AccessKey Secret"
 OSS_REGION="oss-rg-china-mainland" # OSS 存储所在的 地域（region）标识
-OSS_BUCKET="next-static-oss"  #  Bucket（存储空间）名字
-BASE_OSS_URL="https://next-static-oss.oss-rg-china-mainland.aliyuncs.com" #OSS 的公共访问 基础 URL
+OSS_BUCKET="xxxxxxxx"  #  Bucket（存储空间）名字
+BASE_OSS_URL="xxxxxxxx.oss-rg-china-mainland.aliyuncs.com" #OSS 的公共访问 基础 URL
 
 ```
 
