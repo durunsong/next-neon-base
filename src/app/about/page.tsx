@@ -106,7 +106,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white p-8 text-center">
+          <div className="bg-gradient-to-r to-purple-600 rounded-lg text-white p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">🚀 开始使用</h2>
             <p className="mb-6">立即体验 Next Neon Base，构建你的下一个项目</p>
             <div className="space-x-4">

@@ -2,6 +2,7 @@ import '@ant-design/v5-patch-for-react-19';
 
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
 
 import Navigation from '@/components/Navigation';
 
@@ -42,6 +43,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
+      <head>
+        <Script
+          src="https://gw.alipayobjects.com/os/lib/antv/g6/4.8.24/dist/g6.min.js"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* 固定在顶部的导航栏 */}
         <div className="fixed top-0 left-0 right-0 z-50">
