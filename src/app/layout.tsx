@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
 
 import Navigation from '@/components/Navigation';
+import TawkToWidget from '@/components/TawkToWidget';
 
 import './globals.css';
 
@@ -56,6 +57,16 @@ export default function RootLayout({
         </div>
         {/* 主内容区域，添加上边距避免被导航栏遮挡 */}
         <main className="mt-16">{children}</main>
+
+        {/* Tawk.to 客服组件 - 全局加载 */}
+        <TawkToWidget
+          enableInDev={true}
+          customSettings={{
+            position: 'bottom-right',
+            showPreChatForm: true,
+            showOfflineForm: true,
+          }}
+        />
       </body>
     </html>
   );

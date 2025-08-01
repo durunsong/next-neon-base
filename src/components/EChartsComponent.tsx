@@ -15,15 +15,21 @@ export default function EChartsComponent({ option, style, className }: EChartsPr
   const chartInstance = useRef<echarts.ECharts | null>(null);
 
   useEffect(() => {
-    // 初始化图表
-    if (chartRef.current) {
-      if (!chartInstance.current) {
-        chartInstance.current = echarts.init(chartRef.current);
+    // 延迟初始化，避免在主进程中调用
+    const timer = setTimeout(() => {
+      if (chartRef.current && !chartInstance.current) {
+        try {
+          chartInstance.current = echarts.init(chartRef.current);
+          // 设置图表配置
+          chartInstance.current.setOption(option, true);
+        } catch (error) {
+          console.error('ECharts 初始化错误:', error);
+        }
+      } else if (chartInstance.current) {
+        // 更新已存在的图表
+        chartInstance.current.setOption(option, true);
       }
-
-      // 设置图表配置
-      chartInstance.current.setOption(option);
-    }
+    }, 100);
 
     // 响应窗口大小变化
     const handleResize = () => {
@@ -33,9 +39,12 @@ export default function EChartsComponent({ option, style, className }: EChartsPr
 
     // 清理函数
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('resize', handleResize);
-      chartInstance.current?.dispose();
-      chartInstance.current = null;
+      if (chartInstance.current) {
+        chartInstance.current.dispose();
+        chartInstance.current = null;
+      }
     };
   }, [option]);
 
