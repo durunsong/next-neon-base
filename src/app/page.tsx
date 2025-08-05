@@ -4,37 +4,37 @@ import { useEffect, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 
-// 导入情侣主题的图表配置
-import {
-  loveIndexOption,
-  meetingsOption,
-  messagesOption,
-  milestonesOption,
-  photosOption,
-} from '@/components/CoupleChartsConfig';
-import {
-  RecordMomentButton,
-  StartJourneyButton,
-  ViewMemoriesButton,
-} from '@/components/HeartButton';
-// 导入浪漫主题组件
+// 导入背景组件
 import MeteorBackground from '@/components/MeteorBackground';
-import TypewriterText, { milestoneTexts, romanticTexts } from '@/components/TypewriterText';
+import {
+  ExploreArchitectureButton,
+  StartProjectButton,
+  ViewTechStackButton,
+} from '@/components/TechButton';
+// 导入技术栈主题的图表配置
+import {
+  commitHeatmapOption,
+  performanceOption,
+  projectProgressOption,
+  techGrowthOption,
+  techUsageOption,
+} from '@/components/TechStackChartsConfig';
+import TypewriterText, { developmentTexts, techStackTexts } from '@/components/TypewriterText';
 
 // 动态导入组件，避免SSR问题
 const EChartsComponent = dynamic(() => import('@/components/EChartsComponent'), {
   ssr: false,
   loading: () => (
     <div className="flex items-center justify-center h-full">
-      <div className="animate-spin text-4xl">💕</div>
+      <div className="animate-spin text-4xl">🚀</div>
     </div>
   ),
 });
-const CoupleG6Component = dynamic(() => import('@/components/CoupleG6Component'), {
+const TechArchG6Component = dynamic(() => import('@/components/TechArchG6Component'), {
   ssr: false,
   loading: () => (
     <div className="flex items-center justify-center h-full">
-      <div className="animate-spin text-4xl">🌟</div>
+      <div className="animate-spin text-4xl">⚡</div>
     </div>
   ),
 });
@@ -54,13 +54,13 @@ export default function Home() {
   // 避免SSR渲染问题
   if (!mounted) {
     return (
-      <div className="min-h-screen romantic-gradient flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl mb-4 animate-heartbeat">💕</div>
-          <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-6">
-            爱恋时光
+          <div className="text-6xl mb-4 animate-pulse">🚀</div>
+          <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 mb-6">
+            Next.js 全栈应用
           </h1>
-          <p className="text-xl text-gray-600">加载中...</p>
+          <p className="text-xl text-gray-300">技术栈加载中...</p>
         </div>
       </div>
     );
@@ -78,13 +78,13 @@ export default function Home() {
           <div className="text-center max-w-4xl mx-auto">
             {/* 标题区域 */}
             <div className="mb-12">
-              <div className="text-8xl mb-6 animate-float">💕</div>
-              <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 mb-6 animate-fade-in content-glow">
-                爱恋时光
+              <div className="text-8xl mb-6 animate-pulse">🚀</div>
+              <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-indigo-300 mb-6 animate-fade-in content-glow">
+                Next.js 全栈应用
               </h1>
               <div className="text-xl md:text-2xl text-gray-200 mb-8 h-16">
                 <TypewriterText
-                  texts={romanticTexts}
+                  texts={techStackTexts}
                   speed={80}
                   pauseTime={2500}
                   className="font-medium"
@@ -94,45 +94,45 @@ export default function Home() {
 
             {/* CTA 按钮组 */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-              <StartJourneyButton onClick={() => scrollToSection(1)} />
-              <RecordMomentButton onClick={() => scrollToSection(2)} />
-              <ViewMemoriesButton onClick={() => scrollToSection(3)} />
+              <StartProjectButton onClick={() => scrollToSection(1)} />
+              <ViewTechStackButton onClick={() => scrollToSection(2)} />
+              <ExploreArchitectureButton onClick={() => scrollToSection(3)} />
             </div>
 
             {/* 特色展示 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
-              <div className="text-center p-6 glass-card rounded-2xl hover:bg-white/15 transition-all duration-300 animate-sparkle">
+              <div className="text-center p-6 glass-card rounded-2xl hover:bg-white/15">
                 <div className="text-4xl mb-3">📊</div>
-                <h3 className="text-lg font-semibold text-white mb-2 content-glow">数据记录</h3>
-                <p className="text-gray-300 text-sm">用图表记录你们的甜蜜数据</p>
+                <h3 className="text-lg font-semibold text-white mb-2 content-glow">数据可视化</h3>
+                <p className="text-gray-300 text-sm">用ECharts展示技术栈使用情况</p>
               </div>
-              <div className="text-center p-6 glass-card rounded-2xl hover:bg-white/15 transition-all duration-300 animate-sparkle animation-delay-300">
-                <div className="text-4xl mb-3">🌟</div>
-                <h3 className="text-lg font-semibold text-white mb-2 content-glow">情感轨迹</h3>
-                <p className="text-gray-300 text-sm">可视化展示爱情成长历程</p>
+              <div className="text-center p-6 glass-card rounded-2xl hover:bg-white/15">
+                <div className="text-4xl mb-3">🏗️</div>
+                <h3 className="text-lg font-semibold text-white mb-2 content-glow">架构设计</h3>
+                <p className="text-gray-300 text-sm">现代化的全栈应用架构</p>
               </div>
-              <div className="text-center p-6 glass-card rounded-2xl hover:bg-white/15 transition-all duration-300 animate-sparkle animation-delay-600">
-                <div className="text-4xl mb-3">💫</div>
-                <h3 className="text-lg font-semibold text-white mb-2 content-glow">浪漫体验</h3>
-                <p className="text-gray-300 text-sm">沉浸式的浪漫科技感界面</p>
+              <div className="text-center p-6 glass-card rounded-2xl hover:bg-white/15 transition-all duration-300">
+                <div className="text-4xl mb-3">⚡</div>
+                <h3 className="text-lg font-semibold text-white mb-2 content-glow">性能优化</h3>
+                <p className="text-gray-300 text-sm">极致的用户体验和加载速度</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 情侣数据统计区域 */}
+        {/* 技术栈数据统计区域 */}
         <section id="section-1" className="min-h-screen py-20 px-4">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-6">
-                💖 我们的甜蜜数据
+              <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 mb-6">
+                🚀 技术栈数据分析
               </h2>
               <div className="text-lg text-gray-700 h-12">
                 <TypewriterText
                   texts={[
-                    '用数据见证我们的爱情成长 📈',
-                    '每一个数字都是爱的证明 💕',
-                    '科技让爱情更有温度 🌡️',
+                    '用数据驱动技术决策和优化 📈',
+                    '每一个指标都反映项目质量 ⚡',
+                    '现代化监控让应用更可靠 🛡️',
                   ]}
                   speed={60}
                   pauseTime={2000}
@@ -143,44 +143,44 @@ export default function Home() {
 
             {/* 数据可视化网格 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
-              {/* 见面次数统计 */}
+              {/* 技术栈使用统计 */}
               <div className="bg-white/20 backdrop-blur-md rounded-3xl shadow-2xl p-6 border border-white/30 hover:bg-white/30 transition-all duration-300 h-[420px]">
-                <EChartsComponent option={meetingsOption} className="w-full h-full" />
+                <EChartsComponent option={techUsageOption} className="w-full h-full" />
               </div>
 
-              {/* 拍照记录 */}
+              {/* 项目开发进度 */}
               <div className="bg-white/20 backdrop-blur-md rounded-3xl shadow-2xl p-6 border border-white/30 hover:bg-white/30 transition-all duration-300 h-[420px]">
-                <EChartsComponent option={photosOption} className="w-full h-full" />
+                <EChartsComponent option={projectProgressOption} className="w-full h-full" />
               </div>
 
-              {/* 感情指数 */}
+              {/* 性能指标 */}
               <div className="bg-white/20 backdrop-blur-md rounded-3xl shadow-2xl p-6 border border-white/30 hover:bg-white/30 transition-all duration-300 h-[420px]">
-                <EChartsComponent option={loveIndexOption} className="w-full h-full" />
+                <EChartsComponent option={performanceOption} className="w-full h-full" />
               </div>
 
-              {/* 消息互动热力图 */}
+              {/* 代码提交活跃度 */}
               <div className="lg:col-span-2 bg-white/20 backdrop-blur-md rounded-3xl shadow-2xl p-6 border border-white/30 hover:bg-white/30 transition-all duration-300 h-[420px]">
-                <EChartsComponent option={messagesOption} className="w-full h-full" />
+                <EChartsComponent option={commitHeatmapOption} className="w-full h-full" />
               </div>
 
-              {/* 恋爱里程碑 */}
+              {/* 技本成长轨迹 */}
               <div className="bg-white/20 backdrop-blur-md rounded-3xl shadow-2xl p-6 border border-white/30 hover:bg-white/30 transition-all duration-300 h-[420px]">
-                <EChartsComponent option={milestonesOption} className="w-full h-full" />
+                <EChartsComponent option={techGrowthOption} className="w-full h-full" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* 情感轨迹可视化区域 */}
+        {/* 技术架构可视化区域 */}
         <section id="section-2" className="min-h-screen py-20 px-4">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 mb-6">
-                🌟 我们的情感轨迹
+                🏗️ 技术架构展示
               </h2>
               <div className="text-lg text-gray-700 h-12">
                 <TypewriterText
-                  texts={milestoneTexts}
+                  texts={developmentTexts}
                   speed={70}
                   pauseTime={2500}
                   className="text-gray-600"
@@ -188,29 +188,29 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 情感关系图 */}
+            {/* 技术架构关系图 */}
             <div className="bg-white/15 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/30 min-h-[700px]">
-              <CoupleG6Component className="w-full h-full" />
+              <TechArchG6Component className="w-full h-full" />
               <p className="text-center text-gray-600 mt-4 text-sm">
-                💡 提示：可以拖拽节点、缩放画布，探索我们的情感世界
+                💡 提示：可以拖拽节点、缩放画布，探索技术架构关系
               </p>
             </div>
           </div>
         </section>
 
-        {/* 开始旅程区域 */}
+        {/* 开始项目区域 */}
         <section id="section-3" className="min-h-screen flex items-center justify-center px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="text-8xl mb-8 animate-heartbeat">💕</div>
-            <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-8">
-              开始我们的爱情故事
+            <div className="text-8xl mb-8 animate-pulse">🚀</div>
+            <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 mb-8">
+              构建现代化应用
             </h2>
             <div className="text-xl md:text-2xl text-gray-700 mb-12 h-16">
               <TypewriterText
                 texts={[
-                  '每一份爱都值得被记录 📝',
-                  '让科技为爱情加分 ✨',
-                  '创造属于你们的独特回忆 🎯',
+                  '每一行代码都值得精心雕琢 💻',
+                  '让技术为产品赋能 ✨',
+                  '打造属于未来的数字体验 🎯',
                 ]}
                 speed={90}
                 pauseTime={2000}
@@ -218,31 +218,31 @@ export default function Home() {
               />
             </div>
 
-            {/* 功能介绍卡片 */}
+            {/* 技术特性卡片 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105">
                 <div className="text-5xl mb-4">🔐</div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">安全私密</h3>
-                <p className="text-gray-600">端到端加密保护，只有你们知道彼此的秘密</p>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">安全可靠</h3>
+                <p className="text-gray-600">企业级安全架构，JWT认证和Bcrypt密码加密</p>
               </div>
               <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105">
-                <div className="text-5xl mb-4">📱</div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">多端同步</h3>
-                <p className="text-gray-600">手机、电脑完美同步，随时随地记录爱情</p>
+                <div className="text-5xl mb-4">⚡</div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">极致性能</h3>
+                <p className="text-gray-600">服务端渲染、静态生成和Redis缓存优化</p>
               </div>
               <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105">
                 <div className="text-5xl mb-4">🎨</div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">个性定制</h3>
-                <p className="text-gray-600">自定义主题风格，打造专属的爱情空间</p>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">现代设计</h3>
+                <p className="text-gray-600">响应式设计和流畅动画，提供一流用户体验</p>
               </div>
             </div>
 
             {/* 最终CTA */}
             <div className="space-y-6">
-              <StartJourneyButton onClick={() => alert('开启爱情旅程！')} />
+              <StartProjectButton onClick={() => alert('启动项目开发！')} />
               <p className="text-gray-600 text-sm">
-                已有 <span className="text-pink-600 font-semibold">10,000+</span>{' '}
-                对情侣选择我们记录爱情 💕
+                已有 <span className="text-cyan-600 font-semibold">1,000+</span>{' '}
+                开发者选择我们的技术栈 🚀
               </p>
             </div>
           </div>
@@ -251,17 +251,17 @@ export default function Home() {
         {/* 页脚 */}
         <footer className="py-12 px-4 bg-white/10 backdrop-blur-sm border-t border-white/20">
           <div className="container mx-auto text-center">
-            <div className="text-4xl mb-4">💕</div>
-            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-4">
-              爱恋时光
+            <div className="text-4xl mb-4">🚀</div>
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 mb-4">
+              Next.js 全栈应用
             </h3>
-            <p className="text-gray-600 mb-6">用科技记录爱情，让每一份美好都有迹可循</p>
+            <p className="text-gray-600 mb-6">用现代技术构建卓越产品，让每一行代码都有价值</p>
             <div className="flex justify-center space-x-6 text-sm text-gray-500">
-              <span>&copy; 2024 爱恋时光</span>
+              <span>&copy; 2024 Next.js 全栈应用</span>
               <span>•</span>
-              <span>专为情侣设计</span>
+              <span>现代化技术栈</span>
               <span>•</span>
-              <span>用心记录每一份爱</span>
+              <span>构建未来的数字体验</span>
             </div>
           </div>
         </footer>

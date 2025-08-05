@@ -381,7 +381,8 @@ export default function RomanticBackground({ className }: RomanticBackgroundProp
     window.addEventListener('resize', handleResize);
     animate();
 
-    // 清理函数
+    // 清理函数 - 保存当前的 ref 值以避免闭包问题
+    const currentMount = mountRef.current;
     return () => {
       window.removeEventListener('resize', handleResize);
 
@@ -389,8 +390,8 @@ export default function RomanticBackground({ className }: RomanticBackgroundProp
         cancelAnimationFrame(animationFrameRef.current);
       }
 
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
+      if (currentMount && renderer.domElement) {
+        currentMount.removeChild(renderer.domElement);
       }
 
       // 清理 Three.js 资源

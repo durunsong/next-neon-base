@@ -31,8 +31,8 @@ interface TawkToWidgetProps {
  * 3. 带自定义设置：<TawkToWidget customSettings={{ position: 'bottom-left', theme: '#your-color' }} />
  */
 export default function TawkToWidget({
-  widgetId = '688c3386cabd5919319185d9',
-  apiKey = '1j1hqihb8',
+  widgetId = process.env.NEXT_PUBLIC_TAWK_WIDGET_ID || '',
+  apiKey = process.env.NEXT_PUBLIC_TAWK_API_KEY || '',
   enableInDev = false,
   customSettings,
 }: TawkToWidgetProps = {}) {

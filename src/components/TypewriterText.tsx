@@ -96,21 +96,25 @@ export default function TypewriterText({
   );
 }
 
-// 预设情侣主题文案
-export const romanticTexts = [
-  '每一个相遇都是命运的安排 💕',
-  '记录我们的每一份甜蜜时光 ✨',
-  '爱情不是寻找完美的人，而是学会用完美的眼光看待不完美的人 💖',
-  '在茫茫人海中遇见你，是我此生最美的幸运 🌟',
-  '愿我们的爱情像星空一样，永远闪闪发光 ⭐',
-  '每一次心跳都在为你而跳动 💓',
-  '你是我生命中最美的意外 🌸',
+// 预设技术栈主题文案
+export const techStackTexts = [
+  '用现代技术栈构建卓越的数字体验 🚀',
+  'Next.js + React 19 打造极致性能 ⚡',
+  'TypeScript 让代码更安全更可维护 💎',
+  'Tailwind CSS 实现优雅的响应式设计 🎨',
+  'Prisma + PostgreSQL 构建可靠的数据层 🛡️',
+  'Redis 缓存提升应用响应速度 ⚡',
+  'Three.js 带来炫酷的3D视觉效果 ✨',
 ];
 
-export const milestoneTexts = [
-  '从陌生到熟悉，从相识到相爱 💫',
-  '每一个里程碑都是我们爱情的见证 📖',
-  '时间见证了我们的成长和深情 🕰️',
-  '愿时光不老，我们不散 🌈',
-  '在爱的时光里，每一天都是纪念日 🎂',
+export const developmentTexts = [
+  '从需求分析到架构设计，每一步都精益求精 📋',
+  '现代化的开发工具链提升开发效率 🔧',
+  '持续集成与部署保障项目质量 🚀',
+  '性能监控让每一毫秒都有价值 ⏱️',
+  '技术创新驱动业务增长 📈',
 ];
+
+// 保留原有的文案导出（向后兼容）
+export const romanticTexts = techStackTexts;
+export const milestoneTexts = developmentTexts;
