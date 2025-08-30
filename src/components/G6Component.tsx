@@ -2,93 +2,17 @@
 
 import { useEffect, useRef } from 'react';
 
+// 临时简化类型以避免冲突
 interface G6Props {
-  data: G6Data;
+  data: Record<string, unknown>;
   style?: React.CSSProperties;
   className?: string;
 }
 
-interface G6Data {
-  nodes: G6Node[];
-  edges: G6Edge[];
-}
-
-interface G6Node {
-  id: string;
-  label: string;
-  x?: number;
-  y?: number;
-}
-
-interface G6Edge {
-  source: string;
-  target: string;
-  label?: string;
-}
-
-// 声明全局G6对象
-declare global {
-  interface Window {
-    G6: G6Type;
-  }
-}
-
-interface G6Type {
-  Graph: G6GraphConstructor;
-  [key: string]: unknown;
-}
-
-interface G6GraphConstructor {
-  new (config: G6GraphConfig): G6Graph;
-}
-
-interface G6Graph {
-  data: (data: G6Data) => void;
-  render: () => void;
-  destroy: () => void;
-  changeSize: (width: number, height: number) => void;
-  fitView: () => void;
-}
-
-interface G6GraphConfig {
-  container: HTMLElement;
-  width: number;
-  height: number;
-  modes: {
-    default: string[];
-  };
-  layout: {
-    type: string;
-    [key: string]: unknown;
-  };
-  defaultNode: {
-    size: number;
-    style: Record<string, unknown>;
-    labelCfg: {
-      position: string;
-      offset: number;
-      style: Record<string, unknown>;
-    };
-  };
-  defaultEdge: {
-    style: Record<string, unknown>;
-    labelCfg: {
-      autoRotate: boolean;
-      refY: number;
-      style: Record<string, unknown>;
-    };
-  };
-  animate?: boolean;
-  minZoom?: number;
-  maxZoom?: number;
-  fitView?: boolean;
-  fitViewPadding?: number[];
-  fitCenter?: boolean;
-}
-
 export default function G6Component({ data, style, className }: G6Props) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const graphRef = useRef<G6Graph | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const graphRef = useRef<any>(null);
 
   useEffect(() => {
     // 确保G6已加载且容器存在

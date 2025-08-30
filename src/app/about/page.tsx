@@ -109,12 +109,18 @@ export default function AboutPage() {
           <div className="bg-gradient-to-r to-purple-600 rounded-lg text-white p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">🚀 开始使用</h2>
             <p className="mb-6">立即体验 Next Neon Base，构建你的下一个项目</p>
-            <div className="space-x-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/users"
                 className="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 查看用户管理
+              </Link>
+              <Link
+                href="/customer-service"
+                className="inline-block bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                💬 联系客服
               </Link>
               <a
                 href="https://github.com/durunsong/next-neon-base"
